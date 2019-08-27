@@ -8,6 +8,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] float dashTime = .25f;
     [SerializeField] float dashCooldown = 2f;
     [SerializeField] GameObject dashTarget;
+    [SerializeField] GameObject dashDirection;
 
     Rigidbody2D rb;
     PlayerMovement playerMovement;
@@ -49,5 +50,10 @@ public class PlayerDash : MonoBehaviour
             dashCooldownTimer = dashCooldown;
             playerMovement.SetDashable(true);
         }
+    }
+
+    public void DashDirection(int degree)
+    {
+        dashDirection.transform.eulerAngles = new Vector3(0f, 0f, degree);
     }
 }

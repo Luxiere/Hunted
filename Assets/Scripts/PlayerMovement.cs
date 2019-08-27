@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
 
     Rigidbody2D rb;
+    Animator animator;
     PlayerDash playerDash;
 
     bool dashable = true;
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerDash = GetComponent<PlayerDash>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isDashing)
         {
             Movement();
+            FlipSprite();
         }
     }
 
@@ -35,6 +38,33 @@ public class PlayerMovement : MonoBehaviour
         float controlThrowHorizontal = Input.GetAxis("Horizontal");
         float controlThrowVertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(controlThrowHorizontal * moveSpeed, controlThrowVertical * moveSpeed);
+    }
+
+    private void FlipSprite()
+    {
+        if (Mathf.Abs(rb.velocity.x) >= Mathf.Abs(rb.velocity.y))
+        {
+            if (Mathf.Abs(rb.velocity.x) > Mathf.Epsilon)
+            {
+                transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
+            }
+            else
+            {
+                animator.SetBool("runningSouth", false);
+            }
+        }
+        else
+        {
+            if (rb.velocity.y > Mathf.Epsilon)
+            {
+                transform.localScale = new Vector2(1f, 1f);
+            }
+            else
+            {
+                transform.localScale = new Vector2(1f, -1f);
+                animator.SetBool("runningSouth", true);
+            }
+        }
     }
 
     private void DashControl()

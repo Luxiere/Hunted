@@ -14,6 +14,9 @@ public class EnemyAI : MonoBehaviour
 
 	private GameObject _playerPos;
 
+	[Header("General Enemy Values")]
+	[SerializeField] private int _health;
+
 	[Header("Enemy Movement Releated Values")]
 	[SerializeField] private float _moveSpeed;
 	[SerializeField] private float _maxVelocity;
@@ -49,6 +52,16 @@ public class EnemyAI : MonoBehaviour
 		ChangeDirection();
 
 		_shootTimer -= Time.deltaTime;
+	}
+
+	public void EnemyTakeDamage(int amount)
+	{
+		_health -= amount;
+
+		if (_health <= 0)
+		{
+			Destroy(this.gameObject);
+		}
 	}
 
 	private void Shoot()

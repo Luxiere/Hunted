@@ -104,6 +104,11 @@ public class PlayerMovement : MonoBehaviour
         }        
     }
 
+    public bool GetIsDashing()
+    {
+        return isDashing;               //use this if you need to check character dashing
+    }
+
     public void SetIsDashing(bool isDashing)
     {
         this.isDashing = isDashing;

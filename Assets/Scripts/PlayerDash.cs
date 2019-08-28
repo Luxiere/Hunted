@@ -52,8 +52,8 @@ public class PlayerDash : MonoBehaviour
         }
     }
 
-    public void DashDirection(int degree)
+    public void DashDirection(float degree)
     {
-        dashDirection.transform.eulerAngles = new Vector3(0f, 0f, degree);
+        dashDirection.transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, degree));
     }
 }

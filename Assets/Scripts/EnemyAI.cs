@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
 	private Vector2 _movement;
 
 	private GameObject _playerPos;
+	private GameObject projectileParent;
 
 	[Header("Enemy Movement Releated Values")]
 	[SerializeField] private float _moveSpeed;
@@ -28,6 +29,7 @@ public class EnemyAI : MonoBehaviour
 
 	private void Start()
 	{
+        projectileParent = GameObject.Find("Enemy Projectile");
 		_rb = GetComponent<Rigidbody2D>();
 		_playerPos = GameObject.Find("Player");
 		if (_playerPos != null)
@@ -59,6 +61,7 @@ public class EnemyAI : MonoBehaviour
 			playerDir.Normalize();
 			var bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation) as GameObject;
 			bullet.transform.rotation = Quaternion.Euler(playerDir);
+            bullet.transform.parent = projectileParent.transform;
 			bullet.GetComponent<Rigidbody2D>().velocity = playerDir * _bulletSpeed * Time.fixedDeltaTime;
 			Destroy(bullet, _destroyBulletTime);
 			_shootTimer = Random.Range(_minShootDelay, _maxShootDelay);

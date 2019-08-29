@@ -18,9 +18,9 @@ TagManager:
   - 
   - Wall
   - Enemy
-  - 
-  - 
-  - 
+  - Invulnerable
+  - PlayerProjectile
+  - EnemyProjectile
   - 
   - 
   - 

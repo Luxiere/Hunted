@@ -23,13 +23,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Direction();
         Dash();
         DashControl();
         DashCooldown();
         if (!isDashing)
         {
             Movement();
-            FlipSprite();
         }
     }
 
@@ -40,30 +40,29 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(controlThrowHorizontal * moveSpeed, controlThrowVertical * moveSpeed);
     }
 
-    private void FlipSprite()
+    private void Direction()                
     {
-        if (Mathf.Abs(rb.velocity.x) >= Mathf.Abs(rb.velocity.y))
+        if(rb.velocity.x == 0 && rb.velocity.y == 0)
         {
-            if (Mathf.Abs(rb.velocity.x) > Mathf.Epsilon)
-            {
-                transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
-            }
-            else
-            {
-                animator.SetBool("runningSouth", false);
-            }
+            return;
+        }
+
+        if (rb.velocity.x == 0)
+        {
+            if(rb.velocity.y > 0) { playerDash.DashDirection(90); }
+            else { playerDash.DashDirection(270); }
+            // play animation here
+        }
+        else if(rb.velocity.y == 0)
+        {
+            if(rb.velocity.x > 0) { playerDash.DashDirection(0); }
+            else { playerDash.DashDirection(180); }
+            // play animation here
         }
         else
         {
-            if (rb.velocity.y > Mathf.Epsilon)
-            {
-                transform.localScale = new Vector2(1f, 1f);
-            }
-            else
-            {
-                transform.localScale = new Vector2(1f, -1f);
-                animator.SetBool("runningSouth", true);
-            }
+            float dashAngle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+            playerDash.DashDirection(dashAngle);
         }
     }
 
@@ -94,14 +93,6 @@ public class PlayerMovement : MonoBehaviour
         {
             playerDash.Dash();
         }
-    }
-
-    private void Direction()
-    {
-        if (Mathf.Abs(rb.velocity.x) > Mathf.Epsilon || Mathf.Abs(rb.velocity.y) > Mathf.Epsilon)
-        {
-            transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), Mathf.Sign(rb.velocity.y));
-        }        
     }
 
     public bool GetIsDashing()

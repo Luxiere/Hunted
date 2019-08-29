@@ -113,9 +113,5 @@ public class EnemyAI : MonoBehaviour
 		{
 			_moveSpeed *= -1;
 		}
-		else if (other.gameObject.CompareTag("Enemy"))
-		{
-			_moveSpeed *= -1f;
-		}
 	}
 }

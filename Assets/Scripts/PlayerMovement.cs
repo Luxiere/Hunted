@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        ResetTrigger();
         Direction();
         Dash();
         DashControl();
@@ -44,26 +45,44 @@ public class PlayerMovement : MonoBehaviour
     {
         if(rb.velocity.x == 0 && rb.velocity.y == 0)
         {
+            animator.SetBool("isRunning", false);
             return;
         }
 
         if (rb.velocity.x == 0)
         {
-            if(rb.velocity.y > 0) { playerDash.DashDirection(90); }
-            else { playerDash.DashDirection(270); }
-            // play animation here
+            if(rb.velocity.y > 0) { playerDash.DashDirection(90); animator.SetTrigger("runningNorth"); }
+            else { playerDash.DashDirection(270); animator.SetTrigger("runningSouth"); }
         }
         else if(rb.velocity.y == 0)
         {
-            if(rb.velocity.x > 0) { playerDash.DashDirection(0); }
-            else { playerDash.DashDirection(180); }
-            // play animation here
+            if(rb.velocity.x > 0) { playerDash.DashDirection(0); animator.SetTrigger("runningEast"); }
+            else { playerDash.DashDirection(180); animator.SetTrigger("runningWest"); }
         }
         else
         {
             float dashAngle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
             playerDash.DashDirection(dashAngle);
+            if (Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x))
+            {
+                if (rb.velocity.y > 0) { animator.SetTrigger("runningNorth"); }
+                else { animator.SetTrigger("runningSouth"); }
+            }
+            else if (Mathf.Abs(rb.velocity.x) > Mathf.Abs(rb.velocity.y))
+            {
+                if (rb.velocity.x > 0) { animator.SetTrigger("runningEast"); }
+                else { animator.SetTrigger("runningWest");  }
+            }
         }
+    }
+
+    private void ResetTrigger()
+    {
+        animator.SetBool("isRunning", true);
+        animator.ResetTrigger("runningNorth");
+        animator.ResetTrigger("runningSouth");
+        animator.ResetTrigger("runningEast");
+        animator.ResetTrigger("runningWest");
     }
 
     private void DashControl()

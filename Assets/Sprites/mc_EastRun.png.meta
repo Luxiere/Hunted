@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -146,10 +146,10 @@ TextureImporter:
       name: mc_EastRun_0
       rect:
         serializedVersion: 2
-        x: 46
-        y: 273
-        width: 732
-        height: 563
+        x: 0
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,7 +157,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dde5e34fadeff364487ff2f42f9eef48
+      spriteID: b41beba6bf22876449a7362dc68d7cc9
       internalID: 4138778920405128100
       vertices: []
       indices: 
@@ -167,10 +167,10 @@ TextureImporter:
       name: mc_EastRun_1
       rect:
         serializedVersion: 2
-        x: 846
-        y: 132
-        width: 722
-        height: 718
+        x: 800
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca775ad2edac1fb43a4086432ed84054
+      spriteID: 5a16d3dba13642148bc090cceabdbb49
       internalID: -6451954792772638246
       vertices: []
       indices: 
@@ -188,10 +188,10 @@ TextureImporter:
       name: mc_EastRun_2
       rect:
         serializedVersion: 2
-        x: 1647
-        y: 160
-        width: 607
-        height: 671
+        x: 1600
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,7 +199,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf879b7e21f1e9647a3defc3f68bef36
+      spriteID: c31d8b8d5879da242a844c8f4e3304b6
       internalID: -4667819269555951394
       vertices: []
       indices: 
@@ -209,10 +209,10 @@ TextureImporter:
       name: mc_EastRun_3
       rect:
         serializedVersion: 2
-        x: 2405
-        y: 116
-        width: 634
-        height: 720
+        x: 2400
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,7 +220,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cec0f14903e9ab4c8f533fe6c980b3e
+      spriteID: f491dc9c34006ae4a82b592a276385e3
       internalID: -9124041388533287933
       vertices: []
       indices: 
@@ -230,10 +230,10 @@ TextureImporter:
       name: mc_EastRun_4
       rect:
         serializedVersion: 2
-        x: 3217
-        y: 108
-        width: 642
-        height: 733
+        x: 3200
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,7 +241,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49249addc0fa92e448a517765d941faa
+      spriteID: 82bb27f042e6daa4ab36dcd790626acc
       internalID: 4932995934934685436
       vertices: []
       indices: 
@@ -251,10 +251,10 @@ TextureImporter:
       name: mc_EastRun_5
       rect:
         serializedVersion: 2
-        x: 3997
-        y: 140
-        width: 781
-        height: 694
+        x: 4000
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,7 +262,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f3f0741919d1be478a69d5e820e237a
+      spriteID: 3417b44809ca71a4983aec8a6cd610cc
       internalID: -3461983301057988372
       vertices: []
       indices: 
@@ -272,10 +272,10 @@ TextureImporter:
       name: mc_EastRun_6
       rect:
         serializedVersion: 2
-        x: 4877
-        y: 171
-        width: 700
-        height: 630
+        x: 4800
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -283,7 +283,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3e02efa92882534fb135989d30babee
+      spriteID: ed075b139edb9b84285f0af17cb26260
       internalID: 8089222173135253198
       vertices: []
       indices: 

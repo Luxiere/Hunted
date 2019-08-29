@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -146,10 +146,10 @@ TextureImporter:
       name: mc_WestRun_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 171
-        width: 700
-        height: 630
+        x: 0
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,7 +157,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d42d896914632be43b10d92d86cf3da3
+      spriteID: 2e838084d358de745b897021594e5d58
       internalID: 9131457085846689025
       vertices: []
       indices: 
@@ -167,10 +167,10 @@ TextureImporter:
       name: mc_WestRun_1
       rect:
         serializedVersion: 2
-        x: 822
-        y: 140
-        width: 781
-        height: 694
+        x: 800
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ddff82ade27c7944805e8ddf99e9822
+      spriteID: 3097354463f631840b3eafef164869df
       internalID: 1010906542355269708
       vertices: []
       indices: 
@@ -188,10 +188,10 @@ TextureImporter:
       name: mc_WestRun_2
       rect:
         serializedVersion: 2
-        x: 1741
-        y: 108
-        width: 642
-        height: 733
+        x: 1600
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,7 +199,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3ac45f32a279cc4294b458a5babf089
+      spriteID: 92d7653757032304d979bc96fd904f0d
       internalID: -8922563767877282561
       vertices: []
       indices: 
@@ -209,10 +209,10 @@ TextureImporter:
       name: mc_WestRun_3
       rect:
         serializedVersion: 2
-        x: 2561
-        y: 116
-        width: 634
-        height: 720
+        x: 2400
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,7 +220,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f954b03a294ca54498b5241dedf106e8
+      spriteID: 75b5f539b561b774a9a8cd5e40bad986
       internalID: -8746778027831871820
       vertices: []
       indices: 
@@ -230,10 +230,10 @@ TextureImporter:
       name: mc_WestRun_4
       rect:
         serializedVersion: 2
-        x: 3346
-        y: 160
-        width: 607
-        height: 671
+        x: 3200
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,7 +241,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b0cffaedb556bc4b8b72dc38a8b1009
+      spriteID: b65a1d566a87a594889521baa8f42fca
       internalID: 6990307314726283902
       vertices: []
       indices: 
@@ -251,10 +251,10 @@ TextureImporter:
       name: mc_WestRun_5
       rect:
         serializedVersion: 2
-        x: 4032
-        y: 132
-        width: 722
-        height: 718
+        x: 4000
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,7 +262,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ded47769d632d54bbe9da28ec03c6da
+      spriteID: b017ad2c2f2d8494c8765ccf7841ed31
       internalID: 8630841887057785757
       vertices: []
       indices: 
@@ -272,10 +272,10 @@ TextureImporter:
       name: mc_WestRun_6
       rect:
         serializedVersion: 2
-        x: 4822
-        y: 273
-        width: 732
-        height: 563
+        x: 4800
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -283,7 +283,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7e4256e4012dab47930b1345d4f6f04
+      spriteID: 689a11736cfeca34dbae21ea2243bdba
       internalID: -6502115490440214399
       vertices: []
       indices: 

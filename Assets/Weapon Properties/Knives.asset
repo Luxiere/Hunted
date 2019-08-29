@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3526f60cf749af044a72818f66a1b127, type: 3}
   m_Name: Knives
   m_EditorClassIdentifier: 
+  dashSpeed: 10
   dashTime: 0.25
   dashCooldown: 2
   projectileSpeed: 10
   fireRate: 0.25
   existTime: 2
   flyingTime: 1
-  reloadTime: 1
   damage: 10
+  reloadTime: 3
   maxBullet: 45
   magazine: 15
   weapon: {fileID: 2617805132003900573, guid: d4559966bca80cb44a3e02534707a2d2, type: 3}

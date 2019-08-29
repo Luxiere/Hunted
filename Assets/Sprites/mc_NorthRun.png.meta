@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6a7c2ac16e2d3ed408440e3aad09d17e
+guid: 5be6deb8dffe2c143a8b0dee173a6eba
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -17,12 +17,6 @@ TextureImporter:
   - first:
       213: 3895453322862066993
     second: mc_NorthRun_4
-  - first:
-      213: 6491936150227667289
-    second: mc_NorthRun_5
-  - first:
-      213: 4942618282389867008
-    second: mc_NorthRun_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -66,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 160
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -115,30 +109,6 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -146,10 +116,10 @@ TextureImporter:
       name: mc_NorthRun_0
       rect:
         serializedVersion: 2
-        x: 532
-        y: 172
-        width: 1064
-        height: 2276
+        x: 0
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,7 +127,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4d78f825b831074aa130f4bb81fbc37
+      spriteID: ca2b3c8d084cbc6429316a9342c3c64a
       internalID: -6718646919211733122
       vertices: []
       indices: 
@@ -167,10 +137,10 @@ TextureImporter:
       name: mc_NorthRun_1
       rect:
         serializedVersion: 2
-        x: 2580
-        y: 228
-        width: 1064
-        height: 2204
+        x: 800
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,7 +148,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81a41b1e94d50804180625a706ae145a
+      spriteID: 42a2438b042439a42ae888b4e0d154dd
       internalID: -1335432545120563181
       vertices: []
       indices: 
@@ -188,10 +158,10 @@ TextureImporter:
       name: mc_NorthRun_2
       rect:
         serializedVersion: 2
-        x: 4622
-        y: 405
-        width: 1062
-        height: 2003
+        x: 1600
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,7 +169,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0636404e8f84be5458d45f549fd9bbe7
+      spriteID: 8f45bcad16d83d24a98e65019b670d91
       internalID: -955724779215661140
       vertices: []
       indices: 
@@ -209,10 +179,10 @@ TextureImporter:
       name: mc_NorthRun_3
       rect:
         serializedVersion: 2
-        x: 6693
-        y: 300
-        width: 1055
-        height: 2092
+        x: 2400
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,7 +190,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afec778265a80b14ea3ae50df66314c1
+      spriteID: a18494fe48580824aba74c90e355b5e4
       internalID: 7594083528880167131
       vertices: []
       indices: 
@@ -230,10 +200,10 @@ TextureImporter:
       name: mc_NorthRun_4
       rect:
         serializedVersion: 2
-        x: 8741
-        y: 405
-        width: 1063
-        height: 2003
+        x: 3200
+        y: 0
+        width: 800
+        height: 972
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,50 +211,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19ab281d6b307c24494277cc8cc44a8e
+      spriteID: 65c1d45d72a8444468cd2d60af17fbd0
       internalID: 3895453322862066993
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mc_NorthRun_5
-      rect:
-        serializedVersion: 2
-        x: 10780
-        y: 228
-        width: 1064
-        height: 2204
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 116e2b06aba2c4043a0c7da1ed3c081c
-      internalID: 6491936150227667289
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mc_NorthRun_6
-      rect:
-        serializedVersion: 2
-        x: 12828
-        y: 172
-        width: 1064
-        height: 2276
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec742079e35fd284f96478eaa9430c19
-      internalID: 4942618282389867008
       vertices: []
       indices: 
       edges: []

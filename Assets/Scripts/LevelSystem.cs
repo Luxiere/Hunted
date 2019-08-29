@@ -21,7 +21,6 @@ public class LevelSystem : MonoBehaviour
 
     public void LoadNext()
     {
-        sm.LoadScene(levels[index].Name);
     }
 
     [System.Serializable]

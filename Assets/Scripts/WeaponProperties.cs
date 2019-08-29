@@ -23,12 +23,13 @@ public class WeaponProperties : ScriptableObject
 
     public float GetDashTime() { return dashTime; }
     public float GetDashCooldown() { return dashCooldown; }
+    public float GetDashSpeed() { return dashSpeed; }
+
     public float GetExistTime() { return existTime; }
     public float GetProjectileSpeed() { return projectileSpeed; }
     public float GetReloadTime() { return reloadTime; }
     public float GetFireRate() { return fireRate; }
     public float GetFlyTime() { return flyingTime; }
-    public float GetDashSpeed() { return dashSpeed; }
     public int GetMagazine() { return magazine; }
     public int GetMaxBullet() { return maxBullet; }
     public int GetDamage() { return damage; }

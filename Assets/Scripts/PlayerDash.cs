@@ -9,14 +9,14 @@ public class PlayerDash : MonoBehaviour
 
     [Header("Quirk properties")]
     [SerializeField] float knifeConeAngle;
-
+    [SerializeField] GameObject spearShadowPrefab;
 
     Rigidbody2D rb;
     PlayerMovement playerMovement;
     PlayerShooting playerShooting;
     Vector2 dashTargetPos;
 
-    float dashSpeed = 10f;
+    float dashSpeed;
     float dashTime = .25f;
     float dashCooldown = 2f;
     float currentDashTime = 0f;
@@ -24,6 +24,9 @@ public class PlayerDash : MonoBehaviour
 
     bool isDashing = false;
 
+    private void Awake()
+    {
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,6 +47,19 @@ public class PlayerDash : MonoBehaviour
         }
         float perc = currentDashTime / dashTime;
         transform.position = Vector2.Lerp(transform.position, dashTargetPos, perc);
+
+        switch (playerShooting.weapon)
+        {
+            case Weapon.Knives:
+                KnifeQuirk();
+                break;
+            case Weapon.Bow:
+                BowQuirk();
+                break;
+            case Weapon.Spears:
+                SpearQuirk();
+                break;
+        }
     }
 
     public void CacheDashTarget()
@@ -68,17 +84,28 @@ public class PlayerDash : MonoBehaviour
 
     public void KnifeQuirk()
     {
-
+        int remainingKnives = playerShooting.RemainingBulletInMag();
+        float knifeAngle = knifeConeAngle / remainingKnives;
+        float knife1Angle = (180 - knifeConeAngle) / 2;
+        for (int i = 0; i < remainingKnives; i++)
+        {
+            GameObject knives = Instantiate(playerShooting.CurrentWeapon().GetWeapon().gameObject, transform.position, Quaternion.identity) as GameObject;
+            knives.transform.rotation = Quaternion.Euler(knives.transform.rotation.x, knives.transform.rotation.y, knife1Angle + i * knifeAngle);
+        }
+        playerShooting.EmptyChamber();
     }
 
     public void BowQuirk()
     {
-        gameObject.layer = LayerMask.GetMask("Invulnerable");
+        gameObject.layer = 31;
         if(currentDashTime > dashTime)
         {
-            gameObject.layer = LayerMask.GetMask("Player");
+            gameObject.layer = 8;
         }
     }
 
-    public void 
+    public void SpearQuirk()
+    {
+        Instantiate(spearShadowPrefab, transform.position, Quaternion.identity);
+    }
 }

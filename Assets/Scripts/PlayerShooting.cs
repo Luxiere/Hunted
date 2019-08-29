@@ -12,8 +12,14 @@ public class PlayerShooting : MonoBehaviour
 
     [Header("Weapon stats")]
     [SerializeField] WeaponProperties knives;
-    [SerializeField] WeaponProperties bow;
+    [SerializeField] WeaponProperties arrows;
     [SerializeField] WeaponProperties spears;
+
+    [Header("Weapon hand")]
+    [SerializeField] SpriteRenderer hand;
+    [SerializeField] Sprite knife;
+    [SerializeField] Sprite bow;
+    [SerializeField] Sprite spear;
 
     WeaponProperties currentWeapon;
 
@@ -35,12 +41,26 @@ public class PlayerShooting : MonoBehaviour
     bool fireable = true;
     bool firing = false;
 
-    void Start()
+    private void Awake()
     {
-        if (weapon == Weapon.Knives) { currentWeapon = knives; }
-        else if (weapon == Weapon.Bow) { currentWeapon = bow; }
-        else if (weapon == Weapon.Spears) { currentWeapon = spears; }
-
+        switch (weapon)
+        {
+            case Weapon.Knives:
+                currentWeapon = knives;
+                hand.sprite = knife;
+                break;
+            case Weapon.Bow:
+                currentWeapon = arrows;
+                hand.sprite = bow;
+                break;
+            case Weapon.Spears:
+                currentWeapon = spears;
+                hand.sprite = spear;
+                break;
+        }
+    }
+    void Start()
+    {        
         magLeft = currentWeapon.GetMaxBullet();
         currentMag = currentWeapon.GetMagazine();
         weaponPrefab = currentWeapon.GetWeapon();
@@ -53,17 +73,17 @@ public class PlayerShooting : MonoBehaviour
 
     private void Update()
     {
-        if(weapon == Weapon.Spears)
+        switch (weapon)
         {
-            HoldFire();
-        }
-        else if (weapon == Weapon.Bow)
-        {
-            BurstFire();
-        }
-        else if (weapon == Weapon.Knives)
-        {
-            RapidFire();
+            case Weapon.Knives:
+                RapidFire();
+                break;
+            case Weapon.Bow:
+                BurstFire();
+                break;
+            case Weapon.Spears:
+                HoldFire();
+                break;
         }
     }
 
@@ -91,9 +111,11 @@ public class PlayerShooting : MonoBehaviour
             }
             else
             {
+                hand.enabled = false;
                 if (magLeft <= 0) { Debug.Log("No ammo"); }
                 else
                 {
+                    hand.enabled = true;
                     firing = false;
                     FireReload();
                 }
@@ -155,6 +177,7 @@ public class PlayerShooting : MonoBehaviour
             }
             else
             {
+                hand.enabled = false;
                 if (magLeft <= 0) { Debug.Log("No ammo"); }
                 else
                 {
@@ -162,6 +185,7 @@ public class PlayerShooting : MonoBehaviour
                     if (reloadTime <= 0)
                     {
                         FireReload();
+                        hand.enabled = true;
                     }
                 }
             }
@@ -193,6 +217,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
     public WeaponProperties CurrentWeapon() { return currentWeapon; }
-    public int RemainingBulletInMag() { return currentWeapon.GetMagazine() - currentMag; }
+    public int RemainingBulletInMag() { return currentMag; }
+    public void EmptyChamber() { currentMag = 0; }
     public void PickUpBullet(int bulletPickedUp) { magLeft += bulletPickedUp; }
 }

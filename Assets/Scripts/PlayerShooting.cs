@@ -33,6 +33,7 @@ public class PlayerShooting : MonoBehaviour
     float flyTime;
 
     bool fireable = true;
+    bool firing = false;
 
     void Start()
     {
@@ -47,7 +48,6 @@ public class PlayerShooting : MonoBehaviour
         existTime = currentWeapon.GetExistTime();
         reloadTime = currentWeapon.GetReloadTime();
         damage = currentWeapon.GetDamage();
-        fireRate = currentWeapon.GetFireRate();
         flyTime = currentWeapon.GetFlyTime();
     }
 
@@ -69,7 +69,6 @@ public class PlayerShooting : MonoBehaviour
 
     private void BurstFire()
     {
-        bool firing = false;
         if (fireable)
         {
             if (Input.GetMouseButtonDown(0))
@@ -77,54 +76,36 @@ public class PlayerShooting : MonoBehaviour
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
                 firing = true;
+                fireable = false;
             }
         }
         if (firing)
         {
             if (currentMag > 0)
             {
-                StartCoroutine(FireRate(fireRate, currentDamageMultiplier));
+                fireRate -= Time.deltaTime;
+                if (fireRate <= 0)
+                {
+                    FireRate(currentDamageMultiplier);
+                }
             }
             else
             {
-                fireable = false;
                 if (magLeft <= 0) { Debug.Log("No ammo"); }
                 else
                 {
                     firing = false;
-                    StartCoroutine(FireReload(reloadTime));
+                    FireReload();
                 }
             }
         }
-    }
-
-    private IEnumerator FireReload(float reloadTime)
-    {
-        yield return new WaitForSeconds(reloadTime);
-        currentMag = currentWeapon.GetMagazine();
-        magLeft -= currentWeapon.GetMagazine();
-        this.reloadTime = currentWeapon.GetReloadTime();
-        fireable = true;
-    }
-
-    private IEnumerator FireRate(float fireRate, float currentDamageMultiplier)
-    {
-        GameObject playerProjectile = Instantiate(weaponPrefab.gameObject, transform.position, Quaternion.Euler(shootingDirection)) as GameObject;
-        playerProjectile.transform.parent = projectileParent.transform;
-        playerProjectile.GetComponent<PlayerProjectile>().SetShootingDirection(shootingDirection);
-        playerProjectile.GetComponent<PlayerProjectile>().SetSpeed(projectileSpeed);
-        playerProjectile.GetComponent<PlayerProjectile>().SetFlytime(flyTime);
-        playerProjectile.GetComponent<PlayerProjectile>().SetDamage(Mathf.RoundToInt(damage * currentDamageMultiplier));
-        Destroy(playerProjectile, existTime);
-        currentDamageMultiplier = 1;
-        currentMag -= 1;
-        yield return new WaitForSeconds(fireRate);
     }
 
     private void HoldFire()
     {
         if (Input.GetMouseButton(0))
         {
+            Debug.Log(currentDamageMultiplier);
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
             if (currentMag > 0)
@@ -144,7 +125,7 @@ public class PlayerShooting : MonoBehaviour
                     reloadTime -= Time.deltaTime;
                     if (reloadTime <= 0)
                     {
-                        StartCoroutine(FireReload(0f));
+                        FireReload();
                     }
                 }
             }
@@ -153,7 +134,7 @@ public class PlayerShooting : MonoBehaviour
         {
             if (fireable)
             {
-                StartCoroutine(FireRate(0f, currentDamageMultiplier));
+                FireRate(currentDamageMultiplier);
             }
         }        
     }
@@ -166,10 +147,10 @@ public class PlayerShooting : MonoBehaviour
             shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
             if (currentMag > 0)
             {
-                currentFireTime -= Time.deltaTime;
-                if (currentFireTime <= 0)
+                fireRate -= Time.deltaTime;
+                if (fireRate <= 0)
                 {
-                    StartCoroutine(FireRate(0f, currentDamageMultiplier));
+                    FireRate(currentDamageMultiplier);
                 }
             }
             else
@@ -180,11 +161,33 @@ public class PlayerShooting : MonoBehaviour
                     reloadTime -= Time.deltaTime;
                     if (reloadTime <= 0)
                     {
-                        StartCoroutine(FireReload(0f));
+                        FireReload();
                     }
                 }
             }
         }
+    }
+
+    private void FireReload()
+    {
+        currentMag = currentWeapon.GetMagazine();
+        magLeft -= currentWeapon.GetMagazine();
+        reloadTime = currentWeapon.GetReloadTime();
+        fireable = true;
+    }
+
+    private void FireRate(float currentDamageMultiplier)
+    {
+        GameObject playerProjectile = Instantiate(weaponPrefab.gameObject, transform.position, Quaternion.Euler(shootingDirection)) as GameObject;
+        playerProjectile.transform.parent = projectileParent.transform;
+        playerProjectile.GetComponent<PlayerProjectile>().SetShootingDirection(shootingDirection);
+        playerProjectile.GetComponent<PlayerProjectile>().SetSpeed(projectileSpeed);
+        playerProjectile.GetComponent<PlayerProjectile>().SetFlytime(flyTime);
+        playerProjectile.GetComponent<PlayerProjectile>().SetDamage(Mathf.RoundToInt(damage * currentDamageMultiplier));
+        Destroy(playerProjectile, existTime);
+        fireRate = currentWeapon.GetFireRate();
+        currentDamageMultiplier = 1;
+        currentMag -= 1;
     }
 
     public WeaponProperties CurrentWeapon() { return currentWeapon; }

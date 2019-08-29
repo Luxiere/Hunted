@@ -8,7 +8,7 @@ public class WeaponProperties : ScriptableObject
     [SerializeField] float dashTime = .25f;
     [SerializeField] float dashCooldown = 2f;
     [SerializeField] float projectileSpeed = 10f;
-    [SerializeField][Tooltip("Max holding time for spear")] float fireRate = .25f;
+    [SerializeField][Tooltip("Max holding time for spear, time between shots for other weapons")] float fireRate = .25f;
     [SerializeField] float existTime = 4f;
     [SerializeField] float flyingTime = 1f;
     [SerializeField] float reloadTime = 1f;

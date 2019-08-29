@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Enemy
   - Bullet
-  - Wall
   layers:
   - Default
   - TransparentFX
@@ -16,11 +15,11 @@ TagManager:
   - UI
   - 
   - 
-  - Wall
-  - Enemy
-  - Invulnerable
-  - PlayerProjectile
-  - EnemyProjectile
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

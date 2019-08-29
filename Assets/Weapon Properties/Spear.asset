@@ -15,10 +15,11 @@ MonoBehaviour:
   dashTime: 0.25
   dashCooldown: 2
   projectileSpeed: 10
-  firingSpeed: 0.25
+  fireRate: 2
   existTime: 2
+  flyingTime: 1
   reloadTime: 1
   damage: 10
   maxBullet: 45
   magazine: 15
-  weapon: {fileID: 0}
+  weapon: {fileID: 2617805132003900573, guid: 1bcfec48d79c97c45a42f50ace650149, type: 3}

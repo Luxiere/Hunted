@@ -32,7 +32,11 @@ public class PlayerProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (collision.GetComponent<EnemyAI>())
+        {
+            collision.GetComponent<EnemyAI>().EnemyTakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 
     public void SetDamage(int damage) { this.damage = damage; }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -15,6 +16,10 @@ TagManager:
   - UI
   - 
   - 
+  - Player
+  - Player Projectiles
+  - Enemy
+  - Enemy Projectiles
   - 
   - 
   - 
@@ -33,12 +38,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Obstacles
+  - Invulnerable
   m_SortingLayers:
   - name: Default
     uniqueID: 0

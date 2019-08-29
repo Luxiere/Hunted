@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
 {
-    [SerializeField] float dashSpeed = 10f;
-    [SerializeField] float dashTime = .25f;
-    [SerializeField] float dashCooldown = 2f;
     [SerializeField] GameObject dashTarget;
     [SerializeField] GameObject dashDirection;
 
+    [Header("Quirk properties")]
+    [SerializeField] float knifeConeAngle;
+
+
     Rigidbody2D rb;
     PlayerMovement playerMovement;
+    PlayerShooting playerShooting;
     Vector2 dashTargetPos;
 
+    float dashSpeed = 10f;
+    float dashTime = .25f;
+    float dashCooldown = 2f;
     float currentDashTime = 0f;
     float dashCooldownTimer;
 
@@ -23,6 +28,10 @@ public class PlayerDash : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerShooting = GetComponent<PlayerShooting>();
+        dashSpeed = playerShooting.CurrentWeapon().GetDashSpeed();
+        dashTime = playerShooting.CurrentWeapon().GetDashTime();
+        dashCooldown = playerShooting.CurrentWeapon().GetDashCooldown();
     }
        
     public void Dash()
@@ -56,4 +65,20 @@ public class PlayerDash : MonoBehaviour
     {
         dashDirection.transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, degree));
     }
+
+    public void KnifeQuirk()
+    {
+
+    }
+
+    public void BowQuirk()
+    {
+        gameObject.layer = LayerMask.GetMask("Invulnerable");
+        if(currentDashTime > dashTime)
+        {
+            gameObject.layer = LayerMask.GetMask("Player");
+        }
+    }
+
+    public void 
 }

@@ -21,6 +21,7 @@ public class PlayerShooting : MonoBehaviour
     PlayerProjectile weaponPrefab;
 
     int damage;
+    int currentMag;
 
     float fireRate;
     float projectileSpeed;
@@ -28,7 +29,6 @@ public class PlayerShooting : MonoBehaviour
     float currentDamageMultiplier = 1f;
     float reloadTime;
     float magLeft;
-    float currentMag;
     float existTime;
     float flyTime;
 
@@ -178,7 +178,9 @@ public class PlayerShooting : MonoBehaviour
 
     private void FireRate(float currentDamageMultiplier)
     {
-        GameObject playerProjectile = Instantiate(weaponPrefab.gameObject, transform.position, Quaternion.Euler(shootingDirection)) as GameObject;
+        Debug.Log(shootingDirection);
+        GameObject playerProjectile = Instantiate(weaponPrefab.gameObject, transform.position, Quaternion.identity) as GameObject;
+        playerProjectile.transform.up = (Vector2) playerProjectile.transform.position - (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerProjectile.transform.parent = projectileParent.transform;
         playerProjectile.GetComponent<PlayerProjectile>().SetShootingDirection(shootingDirection);
         playerProjectile.GetComponent<PlayerProjectile>().SetSpeed(projectileSpeed);
@@ -191,5 +193,6 @@ public class PlayerShooting : MonoBehaviour
     }
 
     public WeaponProperties CurrentWeapon() { return currentWeapon; }
+    public int RemainingBulletInMag() { return currentWeapon.GetMagazine() - currentMag; }
     public void PickUpBullet(int bulletPickedUp) { magLeft += bulletPickedUp; }
 }

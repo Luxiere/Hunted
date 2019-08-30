@@ -21,4 +21,8 @@ public class SceneManagement : MonoBehaviour
         return SceneManager.sceneCountInBuildSettings == SceneManager.GetActiveScene().buildIndex;
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public enum Weapon {Knives, Bow, Spears}
 public class PlayerShooting : MonoBehaviour
 {
-    public Weapon weapon;
+    public static Weapon weapon;
 
     [Header("Projectile")]
     [SerializeField] GameObject projectileParent;
@@ -30,13 +30,13 @@ public class PlayerShooting : MonoBehaviour
 
     int damage;
     int currentMag;
+    int magLeft;
 
     float fireRate;
     float projectileSpeed;
     float currentFireTime;
     float currentDamageMultiplier = 1f;
     float reloadTime;
-    float magLeft;
     float existTime;
     float flyTime;
 
@@ -230,6 +230,7 @@ public class PlayerShooting : MonoBehaviour
 
     public WeaponProperties CurrentWeapon() { return currentWeapon; }
     public int RemainingBulletInMag() { return currentMag; }
+    public int GetMaxMag() { return magLeft; }
     public void EmptyChamber() { currentMag = 0; }
     public void PickUpBullet(int bulletPickedUp) { magLeft += bulletPickedUp; }
 }

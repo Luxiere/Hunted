@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject[] door;
-    [SerializeField] float cameraMoveSpeed;
 
     LevelSystem ls;
     SceneManagement sm;
@@ -34,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void HandleWinCondition()
     {
+        Debug.Log("yay");
         if (!sm.CheckLastScene())
         {
             GetComponent<SceneManagement>().LoadNextScene();

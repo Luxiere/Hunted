@@ -49,7 +49,7 @@ public class PlayerDash : MonoBehaviour
         float perc = currentDashTime / dashTime;
         transform.position = Vector2.Lerp(transform.position, dashTargetPos, perc);
 
-        switch (playerShooting.weapon)
+        switch (PlayerShooting.weapon)
         {
             case Weapon.Knives:
                 KnifeQuirk();                

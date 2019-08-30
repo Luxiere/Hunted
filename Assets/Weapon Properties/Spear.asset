@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3526f60cf749af044a72818f66a1b127, type: 3}
   m_Name: Spear
   m_EditorClassIdentifier: 
+  dashSpeed: 10
   dashTime: 0.25
   dashCooldown: 2
-  projectileSpeed: 10
+  projectileSpeed: 15
   fireRate: 2
   existTime: 2
-  flyingTime: 1
-  reloadTime: 1
-  damage: 10
-  maxBullet: 45
-  magazine: 15
+  flyingTime: 0.75
+  damage: 100
+  reloadTime: 3
+  maxBullet: 15
+  magazine: 1
   weapon: {fileID: 2617805132003900573, guid: 1bcfec48d79c97c45a42f50ace650149, type: 3}

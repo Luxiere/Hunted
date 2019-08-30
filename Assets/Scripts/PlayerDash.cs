@@ -89,13 +89,14 @@ public class PlayerDash : MonoBehaviour
         {
             int remainingKnives = playerShooting.RemainingBulletInMag();
             float knifeAngle = knifeConeAngle / remainingKnives;
-            float knife1Angle = (180 - knifeConeAngle) / 2 + dashDirection.transform.rotation.z - 90;
+            float knife1Angle = - knifeConeAngle / 2 + dashDirection.transform.rotation.z * Mathf.Rad2Deg;
 
             for (int i = 0; i < remainingKnives; i++)
             {
                 GameObject knives = Instantiate(playerShooting.CurrentWeapon().GetWeapon().gameObject, transform.position, Quaternion.identity) as GameObject;
                 knives.transform.parent = knives.transform;
                 Vector3 dir = new Vector3(Mathf.Cos((knife1Angle + i * knifeAngle) * Mathf.Deg2Rad), Mathf.Sin((knife1Angle + i * knifeAngle) * Mathf.Deg2Rad), 0f);
+                Debug.Log(dashDirection.transform.rotation.z * Mathf.Rad2Deg);
                 knives.transform.up = - (Vector2)dashDirection.transform.position - (Vector2)knives.transform.position;
                 knives.GetComponent<PlayerProjectile>().SetShootingDirection(dir);
                 knives.GetComponent<PlayerProjectile>().SetSpeed(playerShooting.CurrentWeapon().GetProjectileSpeed());

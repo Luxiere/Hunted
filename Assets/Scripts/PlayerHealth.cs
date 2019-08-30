@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerHealth: MonoBehaviour
 {
+    [SerializeField] Animator animator;
     GameManager gm;
 
     private void Start()

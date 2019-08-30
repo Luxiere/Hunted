@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject[] door;
+    [SerializeField] float cameraMoveSpeed;
+
     LevelSystem ls;
     SceneManagement sm;
-    GameObject player;
+    PlayerMovement player;
     int enemies;
 
     void Start()
     {
-
-
+        player = FindObjectOfType<PlayerMovement>();
+        sm = GetComponent<SceneManagement>();
     }
     
     public void EnemyDeath()
@@ -20,7 +23,7 @@ public class GameManager : MonoBehaviour
         enemies -= 1;
         if (enemies <= 0)
         {
-
+            HandleWinCondition();
         }
     }
 
@@ -31,7 +34,24 @@ public class GameManager : MonoBehaviour
 
     public void HandleWinCondition()
     {
-        GetComponent<SceneManagement>().LoadNextScene();
+        if (!sm.CheckLastScene())
+        {
+            GetComponent<SceneManagement>().LoadNextScene();
+            foreach (GameObject i in door)
+            {
+                i.SetActive(false);
+            }
+            Camera.main.transform.position = door[0].transform.position;
+            StartCoroutine(ResetCamera());
+        }
+    }
+
+    private IEnumerator ResetCamera()
+    {
+        yield return new WaitForSeconds(1f);
+        Camera.main.transform.position = player.transform.position;
         Destroy(this);
     }
+
+
 }

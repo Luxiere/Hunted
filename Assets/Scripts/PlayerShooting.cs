@@ -85,6 +85,8 @@ public class PlayerShooting : MonoBehaviour
                 HoldFire();
                 break;
         }
+        Debug.Log(reloadTime);
+        Debug.Log(currentMag);
     }
 
     private void BurstFire()
@@ -107,6 +109,7 @@ public class PlayerShooting : MonoBehaviour
                 if (fireRate <= 0)
                 {
                     FireRate(currentDamageMultiplier);
+                    ResetFireRate();
                 }
             }
             else
@@ -157,39 +160,42 @@ public class PlayerShooting : MonoBehaviour
             if (fireable)
             {
                 FireRate(currentDamageMultiplier);
+                ResetFireRate();
             }
         }        
     }
 
     private void RapidFire()
     {
-        if (Input.GetMouseButton(0))
+        if (currentMag > 0)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
-            if (currentMag > 0)
+            if (Input.GetMouseButton(0))
             {
                 fireRate -= Time.deltaTime;
                 if (fireRate <= 0)
                 {
                     FireRate(currentDamageMultiplier);
-                }
-            }
-            else
-            {
-                hand.enabled = false;
-                if (magLeft <= 0) { Debug.Log("No ammo"); }
-                else
-                {
-                    reloadTime -= Time.deltaTime;
-                    if (reloadTime <= 0)
-                    {
-                        FireReload();
-                        hand.enabled = true;
-                    }
+                    ResetFireRate();
                 }
             }
         }
+        else
+        {
+            hand.enabled = false;
+            if (magLeft <= 0) { Debug.Log("No ammo"); }
+            else
+            {
+                reloadTime -= Time.deltaTime;
+                if (reloadTime <= 0)
+                {
+                    FireReload();
+                    hand.enabled = true;
+                }
+            }
+        }
+        
     }
 
     private void FireReload()
@@ -200,9 +206,8 @@ public class PlayerShooting : MonoBehaviour
         fireable = true;
     }
 
-    private void FireRate(float currentDamageMultiplier)
+    public void FireRate(float currentDamageMultiplier)
     {
-        Debug.Log(shootingDirection);
         GameObject playerProjectile = Instantiate(weaponPrefab.gameObject, transform.position, Quaternion.identity) as GameObject;
         playerProjectile.transform.up = (Vector2) playerProjectile.transform.position - (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerProjectile.transform.parent = projectileParent.transform;
@@ -211,8 +216,12 @@ public class PlayerShooting : MonoBehaviour
         playerProjectile.GetComponent<PlayerProjectile>().SetFlytime(flyTime);
         playerProjectile.GetComponent<PlayerProjectile>().SetDamage(Mathf.RoundToInt(damage * currentDamageMultiplier));
         Destroy(playerProjectile, existTime);
+    }
+
+    private void ResetFireRate()
+    {
         fireRate = currentWeapon.GetFireRate();
-        currentDamageMultiplier = 1;
+        this.currentDamageMultiplier = 1;
         currentMag -= 1;
     }
 

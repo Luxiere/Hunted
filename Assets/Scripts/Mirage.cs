@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class Mirage : MonoBehaviour
 {
+    [SerializeField] float existTime = 2f;
+
+    MirageBlast blast;
+
     private void Start()
     {
-        gameObject.SetActive(false);
+        blast = GetComponentInChildren<MirageBlast>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("EnemyProjectile"))
         {
-            Destroy(collision.gameObject);
+            blast.gameObject.SetActive(true);
+            Destroy(gameObject, existTime);
         }
     }
 }

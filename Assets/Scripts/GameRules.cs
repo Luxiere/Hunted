@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        sm = GetComponent<SceneManagement>();
+
 
     }
     

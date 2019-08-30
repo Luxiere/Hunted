@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerProjectile : MonoBehaviour
 {
     Rigidbody2D rb;
-    Vector3 shootingDirection;
+    Vector3 shootingDirection = Vector3.right;
 
     float flyTime;
     float currentFlyTime = 0;
@@ -21,8 +21,11 @@ public class PlayerProjectile : MonoBehaviour
     {
         if (currentFlyTime < flyTime)
         {
-            currentFlyTime += Time.fixedDeltaTime;
-            rb.velocity = speed * shootingDirection;
+            if (shootingDirection != Vector3.right)
+            {
+                currentFlyTime += Time.fixedDeltaTime;
+                rb.velocity = speed * shootingDirection;
+            }
         }
         else
         {

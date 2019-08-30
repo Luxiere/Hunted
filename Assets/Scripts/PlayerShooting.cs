@@ -233,4 +233,5 @@ public class PlayerShooting : MonoBehaviour
     public int GetMaxMag() { return magLeft; }
     public void EmptyChamber() { currentMag = 0; }
     public void PickUpBullet(int bulletPickedUp) { magLeft += bulletPickedUp; }
+    public static void SetWeapon(Weapon Weapon) { weapon = Weapon; }
 }

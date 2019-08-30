@@ -23,6 +23,8 @@ public class PlayerShooting : MonoBehaviour
 
     WeaponProperties currentWeapon;
 
+    Animator animator;
+
     Vector3 shootingDirection;
     PlayerProjectile weaponPrefab;
 
@@ -60,7 +62,8 @@ public class PlayerShooting : MonoBehaviour
         }
     }
     void Start()
-    {        
+    {
+        animator = GetComponent<Animator>();
         magLeft = currentWeapon.GetMaxBullet();
         currentMag = currentWeapon.GetMagazine();
         weaponPrefab = currentWeapon.GetWeapon();
@@ -85,8 +88,6 @@ public class PlayerShooting : MonoBehaviour
                 HoldFire();
                 break;
         }
-        Debug.Log(reloadTime);
-        Debug.Log(currentMag);
     }
 
     private void BurstFire()
@@ -130,7 +131,7 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Debug.Log(currentDamageMultiplier);
+            animator.SetBool("isHolding", true);
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
             if (currentMag > 0)
@@ -159,6 +160,7 @@ public class PlayerShooting : MonoBehaviour
         {
             if (fireable)
             {
+                animator.SetBool("isHolding", false);
                 FireRate(currentDamageMultiplier);
                 ResetFireRate();
             }

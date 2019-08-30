@@ -15,6 +15,7 @@ public class Mirage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("x");
         if (collision.gameObject.CompareTag("EnemyProjectile"))
         {
             blast.gameObject.SetActive(true);

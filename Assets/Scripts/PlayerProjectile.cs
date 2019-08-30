@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerProjectile : MonoBehaviour
 {
     Rigidbody2D rb;
-    Vector3 shootingDirection = Vector3.right;
+    Vector3 shootingDirection;
+    BoxCollider2D box;
+
+    [SerializeField] bool piercing = false;
 
     float flyTime;
     float currentFlyTime = 0;
@@ -15,21 +18,19 @@ public class PlayerProjectile : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
     }
 
     private void FixedUpdate()
     {
         if (currentFlyTime < flyTime)
         {
-            if (shootingDirection != Vector3.right)
-            {
-                currentFlyTime += Time.fixedDeltaTime;
-                rb.velocity = speed * shootingDirection;
-            }
+            currentFlyTime += Time.fixedDeltaTime;
+            rb.velocity = speed * shootingDirection;
         }
         else
         {
-            return;
+            box.enabled = false;
         }        
     }
 
@@ -38,7 +39,17 @@ public class PlayerProjectile : MonoBehaviour
         if (collision.GetComponent<EnemyAI>())
         {
             collision.GetComponent<EnemyAI>().EnemyTakeDamage(damage);
-            Destroy(gameObject);
+            if (!piercing)
+            {
+                Destroy(gameObject);
+            }
+        }
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            if (!piercing)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

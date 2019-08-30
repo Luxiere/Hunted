@@ -15,6 +15,7 @@ public class PlayerDash : MonoBehaviour
     PlayerMovement playerMovement;
     PlayerShooting playerShooting;
     Vector2 dashTargetPos;
+    GameObject projectileParent;
 
     float dashSpeed;
     float dashTime = .25f;
@@ -22,11 +23,8 @@ public class PlayerDash : MonoBehaviour
     float currentDashTime = 0f;
     float dashCooldownTimer;
 
-    bool isDashing = false;
+    bool dashed = false;
 
-    private void Awake()
-    {
-    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,6 +33,7 @@ public class PlayerDash : MonoBehaviour
         dashSpeed = playerShooting.CurrentWeapon().GetDashSpeed();
         dashTime = playerShooting.CurrentWeapon().GetDashTime();
         dashCooldown = playerShooting.CurrentWeapon().GetDashCooldown();
+        projectileParent = GameObject.Find("Player Projectile");
     }
        
     public void Dash()
@@ -51,7 +50,7 @@ public class PlayerDash : MonoBehaviour
         switch (playerShooting.weapon)
         {
             case Weapon.Knives:
-                KnifeQuirk();
+                KnifeQuirk();                
                 break;
             case Weapon.Bow:
                 BowQuirk();
@@ -84,20 +83,26 @@ public class PlayerDash : MonoBehaviour
 
     public void KnifeQuirk()
     {
-        int remainingKnives = playerShooting.RemainingBulletInMag();
-        float knifeAngle = knifeConeAngle / remainingKnives;
-        float knife1Angle = (180 - knifeConeAngle) / 2 + dashDirection.transform.rotation.z - 90;
-
-        for (int i = 0; i < remainingKnives; i++)
+        if (currentDashTime > dashTime)
         {
-            GameObject knives = Instantiate(playerShooting.CurrentWeapon().GetWeapon().gameObject, transform.position, Quaternion.identity) as GameObject;
-            knives.transform.rotation = Quaternion.Euler(knives.transform.rotation.x, knives.transform.rotation.y, knife1Angle + i * knifeAngle);
-            knives.transform.parent = knives.transform;
-            knives.GetComponent<PlayerProjectile>().SetSpeed (playerShooting.CurrentWeapon().GetProjectileSpeed());
-            knives.GetComponent<PlayerProjectile>().SetFlytime(playerShooting.CurrentWeapon().GetFlyTime());
-            knives.GetComponent<PlayerProjectile>().SetDamage(Mathf.RoundToInt(playerShooting.CurrentWeapon().GetDamage() * 1));
+            Debug.Log("lol");
+            int remainingKnives = playerShooting.RemainingBulletInMag();
+            float knifeAngle = knifeConeAngle / remainingKnives;
+            float knife1Angle = (180 - knifeConeAngle) / 2 + dashDirection.transform.rotation.z - 90;
+
+            for (int i = 0; i < remainingKnives; i++)
+            {
+                GameObject knives = Instantiate(playerShooting.CurrentWeapon().GetWeapon().gameObject, transform.position, Quaternion.identity) as GameObject;
+                knives.transform.parent = knives.transform;
+                Vector3 dir = new Vector3(Mathf.Cos((knife1Angle + i * knifeAngle) * Mathf.Deg2Rad), - Mathf.Sin((knife1Angle + i * knifeAngle) * Mathf.Deg2Rad), 0f);
+                knives.transform.up = - (Vector2) dashDirection.transform.position - (Vector2) knives.transform.position;
+                knives.GetComponent<PlayerProjectile>().SetShootingDirection(dir);
+                knives.GetComponent<PlayerProjectile>().SetSpeed(playerShooting.CurrentWeapon().GetProjectileSpeed());
+                knives.GetComponent<PlayerProjectile>().SetFlytime(playerShooting.CurrentWeapon().GetFlyTime());
+                knives.GetComponent<PlayerProjectile>().SetDamage(Mathf.RoundToInt(playerShooting.CurrentWeapon().GetDamage() * 1));
+            }
+            playerShooting.EmptyChamber();
         }
-        playerShooting.EmptyChamber();
     }
 
     public void BowQuirk()
@@ -111,6 +116,9 @@ public class PlayerDash : MonoBehaviour
 
     public void SpearQuirk()
     {
-        Instantiate(spearShadowPrefab, transform.position, Quaternion.identity);
+        if (Mathf.Approximately(currentDashTime - Time.deltaTime, 0))
+        {
+            Instantiate(spearShadowPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

@@ -44,7 +44,7 @@ public class PlayerProjectile : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else
         {
             if (!piercing)
             {

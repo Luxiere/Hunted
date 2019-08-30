@@ -132,6 +132,7 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             animator.SetBool("isHolding", true);
+            Debug.Log(currentDamageMultiplier);
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
             if (currentMag > 0)

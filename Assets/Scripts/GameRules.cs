@@ -15,18 +15,23 @@ public class GameManager : MonoBehaviour
 
     }
     
-    void Update()
+    public void EnemyDeath()
     {
+        enemies -= 1;
+        if (enemies <= 0)
+        {
 
+        }
     }
 
     public void HandleLoseCondition()
     {
-        //load lose screen
+
     }
 
     public void HandleWinCondition()
     {
-        //load win screen
+        GetComponent<SceneManagement>().LoadNextScene();
+        Destroy(this);
     }
 }

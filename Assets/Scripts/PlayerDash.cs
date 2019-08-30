@@ -38,11 +38,13 @@ public class PlayerDash : MonoBehaviour
        
     public void Dash()
     {
+        dashed = false;
         currentDashTime += Time.deltaTime;
         if (currentDashTime > dashTime)
         {
             currentDashTime = 0;
             playerMovement.SetIsDashing(false);
+            dashed = true;
         }
         float perc = currentDashTime / dashTime;
         transform.position = Vector2.Lerp(transform.position, dashTargetPos, perc);
@@ -83,9 +85,8 @@ public class PlayerDash : MonoBehaviour
 
     public void KnifeQuirk()
     {
-        if (currentDashTime > dashTime)
+        if (dashed)
         {
-            Debug.Log("lol");
             int remainingKnives = playerShooting.RemainingBulletInMag();
             float knifeAngle = knifeConeAngle / remainingKnives;
             float knife1Angle = (180 - knifeConeAngle) / 2 + dashDirection.transform.rotation.z - 90;
@@ -94,8 +95,8 @@ public class PlayerDash : MonoBehaviour
             {
                 GameObject knives = Instantiate(playerShooting.CurrentWeapon().GetWeapon().gameObject, transform.position, Quaternion.identity) as GameObject;
                 knives.transform.parent = knives.transform;
-                Vector3 dir = new Vector3(Mathf.Cos((knife1Angle + i * knifeAngle) * Mathf.Deg2Rad), - Mathf.Sin((knife1Angle + i * knifeAngle) * Mathf.Deg2Rad), 0f);
-                knives.transform.up = - (Vector2) dashDirection.transform.position - (Vector2) knives.transform.position;
+                Vector3 dir = new Vector3(Mathf.Cos((knife1Angle + i * knifeAngle) * Mathf.Deg2Rad), Mathf.Sin((knife1Angle + i * knifeAngle) * Mathf.Deg2Rad), 0f);
+                knives.transform.up = - (Vector2)dashDirection.transform.position - (Vector2)knives.transform.position;
                 knives.GetComponent<PlayerProjectile>().SetShootingDirection(dir);
                 knives.GetComponent<PlayerProjectile>().SetSpeed(playerShooting.CurrentWeapon().GetProjectileSpeed());
                 knives.GetComponent<PlayerProjectile>().SetFlytime(playerShooting.CurrentWeapon().GetFlyTime());
@@ -108,7 +109,7 @@ public class PlayerDash : MonoBehaviour
     public void BowQuirk()
     {
         gameObject.layer = 31;
-        if(currentDashTime > dashTime)
+        if(dashed)
         {
             gameObject.layer = 8;
         }

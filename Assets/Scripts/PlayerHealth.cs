@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerHealth: MonoBehaviour
 {
     GameManager gm;
-    [SerializeField] Animator playerAnimator;
 
     private void Start()
     {
@@ -18,7 +17,6 @@ public class PlayerHealth: MonoBehaviour
         if (collision.gameObject.tag == "Enemy Projectile")
         {
             gm.HandleLoseCondition();
-            playerAnimator.SetTrigger("dead");
         }
     }
 }

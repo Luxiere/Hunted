@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     PlayerDash playerDash;
 
+    float currentMoveSpeed;
+
     bool dashable = true;
     bool isDashing = false;
 
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerDash = GetComponent<PlayerDash>();
         animator = GetComponent<Animator>();
+        currentMoveSpeed = moveSpeed;
     }
 
     void Update()
@@ -38,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float controlThrowHorizontal = Input.GetAxis("Horizontal");
         float controlThrowVertical = Input.GetAxis("Vertical");
-        rb.velocity = new Vector2(controlThrowHorizontal * moveSpeed, controlThrowVertical * moveSpeed);
+        rb.velocity = new Vector2(controlThrowHorizontal * currentMoveSpeed, controlThrowVertical * currentMoveSpeed);
     }
 
     private void Direction()                

@@ -46,18 +46,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Direction()                
     {
-        if(rb.velocity.x == 0 && rb.velocity.y == 0)
+        if(Mathf.Approximately(rb.velocity.x, 0f) && Mathf.Approximately(rb.velocity.y, 0f))
         {
             animator.SetBool("isRunning", false);
             return;
         }
 
-        if (rb.velocity.x == 0)
+        if (Mathf.Approximately(rb.velocity.x, 0f))
         {
             if(rb.velocity.y > 0) { playerDash.DashDirection(90); animator.SetTrigger("runningNorth"); }
             else { playerDash.DashDirection(270); animator.SetTrigger("runningSouth"); }
         }
-        else if(rb.velocity.y == 0)
+        else if(Mathf.Approximately(rb.velocity.y, 0f))
         {
             if(rb.velocity.x > 0) { playerDash.DashDirection(0); animator.SetTrigger("runningEast"); }
             else { playerDash.DashDirection(180); animator.SetTrigger("runningWest"); }

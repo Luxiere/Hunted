@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField] private float _directionChangeTime;
 
 	[Header("Shooting Releated Values")]
+	[SerializeField] private float _timeUntilStartShooting;
 	[SerializeField] private float _minShootDelay;
 	[SerializeField] private float _maxShootDelay;
 	[SerializeField] private float _bulletSpeed;
@@ -54,6 +55,7 @@ public class EnemyAI : MonoBehaviour
 		ChangeDirection();
 
 		_shootTimer -= Time.deltaTime;
+		_timeUntilStartShooting -= Time.deltaTime;
 	}
 
 	public void EnemyTakeDamage(int amount)
@@ -68,16 +70,19 @@ public class EnemyAI : MonoBehaviour
 
 	private void Shoot()
 	{
-		if (_shootTimer <= 0f)
+		if (_timeUntilStartShooting <= 0)
 		{
-			Vector2 playerDir = new Vector2(_playerPos.transform.position.x - transform.position.x, _playerPos.transform.position.y - transform.position.y);
-			playerDir.Normalize();
-			var bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation) as GameObject;
-			bullet.transform.rotation = Quaternion.Euler(playerDir);
-            bullet.transform.parent = projectileParent.transform;
-			bullet.GetComponent<Rigidbody2D>().velocity = playerDir * _bulletSpeed * Time.fixedDeltaTime;
-			Destroy(bullet, _destroyBulletTime);
-			_shootTimer = Random.Range(_minShootDelay, _maxShootDelay);
+			if (_shootTimer <= 0f)
+			{
+				Vector2 playerDir = new Vector2(_playerPos.transform.position.x - transform.position.x, _playerPos.transform.position.y - transform.position.y);
+				playerDir.Normalize();
+				var bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation) as GameObject;
+				bullet.transform.rotation = Quaternion.Euler(playerDir);
+				bullet.transform.parent = projectileParent.transform;
+				bullet.GetComponent<Rigidbody2D>().velocity = playerDir * _bulletSpeed * Time.fixedDeltaTime;
+				Destroy(bullet, _destroyBulletTime);
+				_shootTimer = Random.Range(_minShootDelay, _maxShootDelay);
+			}
 		}
 	}
 

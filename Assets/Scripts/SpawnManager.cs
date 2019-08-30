@@ -3,77 +3,32 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-	// private variables
-	private Vector2 _randomPoint;
-
-	private List<GameObject> _enemies = new List<GameObject>();
-
-	[Header("Spawner Properties")]
-	[SerializeField] private float _randX;
-	[SerializeField] private float _randY;
-	[SerializeField] private int _maxEnemyCount;
-	[SerializeField] private GameObject _enemyPrefab;
-
-	private void Start()
-	{
-		SpawnEnemies();
-	}
-
-	private void Update()
-	{
-		_randomPoint = new Vector2(Random.Range(-_randX, _randX), Random.Range(-_randY, _randY));
-	}
-
-	private void SpawnEnemies()
-	{
-		for (int e = 0; e <= _maxEnemyCount - 1; e++)
-		{
-			_randomPoint = new Vector2(Random.Range(-_randX, _randX), Random.Range(-_randY, _randY));
-			var enemy = Instantiate(_enemyPrefab, _randomPoint, Quaternion.identity) as GameObject;
-			_enemies.Add(enemy);
-		}
-	}
-=======
-=======
->>>>>>> 35f5ef274711dbae319ebfb20a83a891e98a6c15
     // private variables
     private float _spawnTimer = 0f;
 
     private Vector2 _randomPoint;
-
-    private List<GameObject> _enemies = new List<GameObject>();
+    private List<Vector2> randomPos = new List<Vector2>();
+    private Bounds bounds;
 
     [Header("Spawner Properties")]
-    [SerializeField] private float _nextSpawnTime;
-    [SerializeField] private float _randX;
-    [SerializeField] private float _randY;
     [SerializeField] private int _maxEnemyCount;
     [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private PolygonCollider2D[] spawnArea;
 
-    private void Start()
+    public void Spawn()
     {
-        //_randX = Random.Range(-_randX, _randX);
-        //_randY = Random.Range(-_randY, _randY);
-        _randomPoint = new Vector2(Random.Range(-_randX, _randX), Random.Range(-_randY, _randY));
-    }
-
-    private void Update()
-    {
-        _spawnTimer -= Time.deltaTime;
-
-        if (_spawnTimer <= 0f && _enemies.Count < _maxEnemyCount)
+        while (randomPos.Count < _maxEnemyCount)
         {
-            _randomPoint = new Vector2(Random.Range(-_randX, _randX), Random.Range(-_randY, _randY));
-
+            bounds = spawnArea[Random.Range(0, spawnArea.Length)].bounds;
+            _randomPoint = new Vector2(Random.Range(bounds.min.x, bounds.max.x), Random.Range(bounds.min.y, bounds.max.y));
+            randomPos.Add(_randomPoint);
+        }
+        foreach (Vector2 _randomPoint in randomPos)
+        {
             var enemy = Instantiate(_enemyPrefab, _randomPoint, Quaternion.identity) as GameObject;
-            _enemies.Add(enemy);
-            _spawnTimer = _nextSpawnTime;
+            enemy.transform.position = _randomPoint;
         }
     }
-<<<<<<< HEAD
->>>>>>> e1d7dd380c67b7264be5c8ea89a34838ddc3c92b
-=======
->>>>>>> 35f5ef274711dbae319ebfb20a83a891e98a6c15
+
+    public int GetEnemyNumbers() { return _maxEnemyCount; }
 }

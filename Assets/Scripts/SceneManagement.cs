@@ -16,13 +16,9 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(idx);
     }
 
-    public void ReloadScene()
+    public bool CheckLastScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        return SceneManager.sceneCountInBuildSettings == SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void OnNewScene(Action todo)
-    {
-        SceneManager.sceneLoaded += (a,b) => { todo(); };
-    }
 }

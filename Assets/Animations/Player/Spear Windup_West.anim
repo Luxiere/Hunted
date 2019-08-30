@@ -138,6 +138,25 @@ AnimationClip:
     path: Colliders/Collider
     classID: 70
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Offset.x
+    path: 
+    classID: 70
+    script: {fileID: 0}
   m_PPtrCurves:
   - curve:
     - time: 0
@@ -220,6 +239,13 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 4160622422
+      attribute: 413499720
+      script: {fileID: 0}
+      typeID: 70
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 0
       attribute: 413499720
       script: {fileID: 0}
       typeID: 70
@@ -532,6 +558,25 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_Offset.x
     path: Colliders/Collider
+    classID: 70
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Offset.x
+    path: 
     classID: 70
     script: {fileID: 0}
   m_EulerEditorCurves:

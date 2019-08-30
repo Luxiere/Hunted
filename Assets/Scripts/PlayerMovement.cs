@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     PlayerDash playerDash;
 
     float currentMoveSpeed;
+    float controlThrowHorizontal;
+    float controlThrowVertical;
 
     bool dashable = true;
     bool isDashing = false;
@@ -39,8 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        float controlThrowHorizontal = Input.GetAxis("Horizontal");
-        float controlThrowVertical = Input.GetAxis("Vertical");
+        controlThrowHorizontal = Input.GetAxis("Horizontal");
+        controlThrowVertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(controlThrowHorizontal * currentMoveSpeed, controlThrowVertical * currentMoveSpeed);
     }
 
@@ -52,28 +54,28 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (Mathf.Approximately(rb.velocity.x, 0f))
+        if (Mathf.Approximately(controlThrowHorizontal, 0f))
         {
-            if(rb.velocity.y > 0) { playerDash.DashDirection(90); animator.SetTrigger("runningNorth"); }
+            if(controlThrowVertical > 0) { playerDash.DashDirection(90); animator.SetTrigger("runningNorth"); }
             else { playerDash.DashDirection(270); animator.SetTrigger("runningSouth"); }
         }
-        else if(Mathf.Approximately(rb.velocity.y, 0f))
+        else if(Mathf.Approximately(controlThrowVertical, 0f))
         {
-            if(rb.velocity.x > 0) { playerDash.DashDirection(0); animator.SetTrigger("runningEast"); }
+            if(controlThrowHorizontal > 0) { playerDash.DashDirection(0); animator.SetTrigger("runningEast"); }
             else { playerDash.DashDirection(180); animator.SetTrigger("runningWest"); }
         }
         else
         {
-            float dashAngle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+            float dashAngle = Mathf.Atan2(controlThrowVertical, controlThrowHorizontal) * Mathf.Rad2Deg;
             playerDash.DashDirection(dashAngle);
-            if (Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x))
+            if (Mathf.Abs(controlThrowVertical) > Mathf.Abs(controlThrowHorizontal))
             {
-                if (rb.velocity.y > 0) { animator.SetTrigger("runningNorth"); }
+                if (controlThrowVertical > 0) { animator.SetTrigger("runningNorth"); }
                 else { animator.SetTrigger("runningSouth"); }
             }
-            else if (Mathf.Abs(rb.velocity.x) > Mathf.Abs(rb.velocity.y))
+            else if (Mathf.Abs(controlThrowHorizontal) > Mathf.Abs(controlThrowVertical))
             {
-                if (rb.velocity.x > 0) { animator.SetTrigger("runningEast"); }
+                if (controlThrowHorizontal > 0) { animator.SetTrigger("runningEast"); }
                 else { animator.SetTrigger("runningWest");  }
             }
         }

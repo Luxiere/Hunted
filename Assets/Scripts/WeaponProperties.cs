@@ -30,9 +30,11 @@ public class WeaponProperties : ScriptableObject
     public float GetReloadTime() { return reloadTime; }
     public float GetFireRate() { return fireRate; }
     public float GetFlyTime() { return flyingTime; }
+
     public int GetMagazine() { return magazine; }
     public int GetMaxBullet() { return maxBullet; }
     public int GetDamage() { return damage; }
+
     public PlayerProjectile GetWeapon() { return weapon; }
 
 }

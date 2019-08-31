@@ -93,7 +93,6 @@ public class EnemyAI : MonoBehaviour
 				Vector2 playerDir = new Vector2(_playerPos.transform.position.x - transform.position.x, _playerPos.transform.position.y - transform.position.y);
 				playerDir.Normalize();
 				var bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation) as GameObject;
-				Debug.Log(Random.value);
                 AudioSource.PlayClipAtPoint(shootingSFX, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
 				bullet.transform.rotation = Quaternion.Euler(playerDir);
 				bullet.transform.parent = projectileParent.transform;

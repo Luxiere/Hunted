@@ -204,18 +204,15 @@ MonoBehaviour:
   _directionChangeTime: 3.5
   _timeUntilStartShooting: 3
   _minShootDelay: 1
-  _maxShootDelay: 1.5
+  _maxShootDelay: 3
   _bulletSpeed: 400
   _destroyBulletTime: 4
-  _lieBulletPercentage: 0.15
+  _lieBulletPercentage: 0.3
   _bulletPrefab: {fileID: 3275694363478678053, guid: 2bde34a9b6dfd6c46a878bdfc956361e,
     type: 3}
-<<<<<<< HEAD:Assets/Prefabs/Enemy.prefab
   _lieBulletPrefab: {fileID: 2421004970427365822, guid: 2598ab6182bf95b4fb1cbc5e84502652,
     type: 3}
-=======
   shootingSFX: {fileID: 8300000, guid: 366b13da75a4bc544a52611de6a20187, type: 3}
->>>>>>> cb975a77d2f7884cce4cbd76612265d2599752a8:Assets/Prefabs/Enemy/Enemy.prefab
 --- !u!95 &249408162
 Animator:
   serializedVersion: 3

@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     public void Spawn(PolygonCollider2D[] spawnArea, int _maxEnemyCount)
     {
+
         while (randomPos.Count < _maxEnemyCount)
         {
             bounds = spawnArea[Random.Range(0, spawnArea.Length)].bounds;

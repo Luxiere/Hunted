@@ -11,14 +11,12 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject _optionsMenu;
 	[SerializeField] private GameObject _creditsMenu;
     [SerializeField] private GameObject _weaponMenu;
-    [SerializeField] Texture2D cursor;
     [SerializeField] Animator animator;
 
     public static bool won;
     
     private IEnumerator Start()
     {
-        Cursor.SetCursor(cursor, new Vector2(cursor.width/2, cursor.height/2), CursorMode.Auto);
         yield return new WaitForSeconds(2f);
         if (won)
         {

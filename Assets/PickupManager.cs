@@ -21,6 +21,7 @@ public class PickupManager : MonoBehaviour
     public void PickedUp()
     {
         chapters[currentPickedup].SetActive(true);
+        gm.player.GetComponent<PlayerShooting>().UIOnOff(true);
         foreach(GameObject UI in otherUI)
         {
             UI.SetActive(false);
@@ -31,6 +32,7 @@ public class PickupManager : MonoBehaviour
     public void Back()
     {
         chapters[currentPickedup].SetActive(false);
+        gm.player.GetComponent<PlayerShooting>().UIOnOff(false);
         foreach (GameObject UI in otherUI)
         {
             UI.SetActive(true);

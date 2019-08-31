@@ -46,6 +46,7 @@ public class PlayerShooting : MonoBehaviour
     float existTime;
     float flyTime;
 
+    bool UI_On = true;
     bool fireable = true;
     bool firing = false;
         
@@ -83,17 +84,20 @@ public class PlayerShooting : MonoBehaviour
 
     private void Update()
     {
-        switch (weapon)
+        if (!UI_On)
         {
-            case Weapon.Knives:
-                RapidFire();
-                break;
-            case Weapon.Bow:
-                BurstFire();
-                break;
-            case Weapon.Spears:
-                HoldFire();
-                break;
+            switch (weapon)
+            {
+                case Weapon.Knives:
+                    RapidFire();
+                    break;
+                case Weapon.Bow:
+                    BurstFire();
+                    break;
+                case Weapon.Spears:
+                    HoldFire();
+                    break;
+            }
         }
     }
 
@@ -269,5 +273,6 @@ public class PlayerShooting : MonoBehaviour
     public int GetMaxMag() { return magLeft; }
     public void EmptyChamber() { currentMag = 0; }
     public void PickUpBullet(int bulletPickedUp) { magLeft += bulletPickedUp; }
+    public void UIOnOff(bool uiOn) { UI_On = uiOn; }
     public static void SetWeapon(Weapon Weapon) { weapon = Weapon; }
 }

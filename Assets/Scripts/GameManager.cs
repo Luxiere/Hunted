@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
 
     LevelSystem ls;
     SceneManagement sm;
-    PlayerMovement player;
+
+    [HideInInspector]
+    public PlayerMovement player;
 
     int enemies;
 

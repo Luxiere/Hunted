@@ -11,7 +11,7 @@ public class PickupManager : MonoBehaviour
     PauseMenu pause;
     GameManager gm;
 
-    private void Awake()
+    private void Start()
     {
         pause = GetComponent<PauseMenu>();
         gm = GetComponent<GameManager>();

@@ -11,10 +11,11 @@ public class PickupManager : MonoBehaviour
     PauseMenu pause;
     GameManager gm;
 
-    private void Start()
+    private IEnumerator Start()
     {
         pause = GetComponent<PauseMenu>();
         gm = GetComponent<GameManager>();
+        yield return new WaitForSeconds(.25f);
         PickedUp();
     }
 

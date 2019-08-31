@@ -17,8 +17,6 @@ public class PlayerHealth: MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("a");
-
         if (collision.CompareTag("EnemyProjectile"))
         {
             player.Dead();

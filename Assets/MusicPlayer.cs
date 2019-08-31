@@ -8,6 +8,11 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start()
     {
+        if(!PlayerPrefs.HasKey("music sound") || !PlayerPrefs.HasKey("sound"))
+        {
+            PlayerPrefsController.SetMusicVolume(.5f);
+            PlayerPrefsController.SetSoundVolume(.5f);
+        }
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = PlayerPrefsController.GetMusicVolume();
     }

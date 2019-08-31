@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject _mainMenu;
 	[SerializeField] private GameObject _optionsMenu;
 	[SerializeField] private GameObject _creditsMenu;
+    [SerializeField] private GameObject _weaponMenu;
     [SerializeField] Texture2D cursor;
     [SerializeField] Animator animator;
 
@@ -17,7 +18,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursor, new Vector2(cursor.width/2, cursor.height/2), CursorMode.Auto);
         won = GetComponent<DataSave>().Load();
         if (won)
         {
@@ -25,10 +26,17 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void StartGame()
-	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-	}
+    public void WeaponMenu()
+    {
+        _weaponMenu.SetActive(true);
+        _mainMenu.SetActive(false);
+    }
+
+    public void WeaponBack()
+    {
+        _weaponMenu.SetActive(false);
+        _mainMenu.SetActive(true);
+    }
 
 	public void OptionsMenu()
 	{

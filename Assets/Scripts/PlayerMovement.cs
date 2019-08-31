@@ -58,11 +58,7 @@ public class PlayerMovement : MonoBehaviour
         controlThrowHorizontal = Input.GetAxis("Horizontal");
         controlThrowVertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(controlThrowHorizontal * currentMoveSpeed, controlThrowVertical * currentMoveSpeed);
-        if(currentTimedStep <= 0)
-        {
-            AudioSource.PlayClipAtPoint(clips[Random.Range(0, clips.Length)], Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
-            currentTimedStep = timedStep;
-        }
+
         currentTimedStep -= Time.deltaTime;
     }
 
@@ -72,6 +68,14 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
             return;
+        }
+        else
+        {
+            if (currentTimedStep <= 0)
+            {
+                AudioSource.PlayClipAtPoint(clips[Random.Range(0, clips.Length)], Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
+                currentTimedStep = timedStep;
+            }
         }
 
         if (Mathf.Approximately(controlThrowHorizontal, 0f))

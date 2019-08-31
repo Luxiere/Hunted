@@ -19,7 +19,7 @@ MonoBehaviour:
   fireRate: 0.25
   existTime: 7
   flyingTime: 0.5
-  damage: 10
+  damage: 20
   reloadTime: 1
   maxBullet: 36
   magazine: 9

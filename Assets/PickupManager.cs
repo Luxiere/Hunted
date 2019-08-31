@@ -39,7 +39,7 @@ public class PickupManager : MonoBehaviour
             UI.SetActive(true);
         }
         Time.timeScale = 1;
-        if (currentPickedup >= chapters.Length)
+        if (currentPickedup >= chapters.Length - 1)
         {
             gm.HandleWinCondition();
         }

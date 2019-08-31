@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -37590,7 +37590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1711782952
 Transform:
   m_ObjectHideFlags: 0
@@ -40143,11 +40143,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2397257951913540505, guid: 8f3fa056ea1e8da468b54d969e2ae692,
-        type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2397257951913540504, guid: 8f3fa056ea1e8da468b54d969e2ae692,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -40157,6 +40152,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 825
+      objectReference: {fileID: 0}
+    - target: {fileID: 2397257951913540505, guid: 8f3fa056ea1e8da468b54d969e2ae692,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f3fa056ea1e8da468b54d969e2ae692, type: 3}
@@ -40502,6 +40502,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa006536757fd0e4ea94fcb8d106bc71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4996767306609838471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996767306609838463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2c8f90db4e64342a4c8353b12c05bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5179356616980520470

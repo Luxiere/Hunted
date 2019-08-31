@@ -14,12 +14,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Texture2D cursor;
     [SerializeField] Animator animator;
 
-    bool won;
-
-    private void Start()
+    public static bool won;
+    
+    private IEnumerator Start()
     {
         Cursor.SetCursor(cursor, new Vector2(cursor.width/2, cursor.height/2), CursorMode.Auto);
-        won = GetComponent<DataSave>().Load();
+        yield return new WaitForSeconds(2f);
         if (won)
         {
             animator.enabled = true;

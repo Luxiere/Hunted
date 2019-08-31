@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour
 
     public void HandleWinCondition()
     {
-        winScreen.SetActive(false);
-        GetComponent<DataSave>().Save();
+        winScreen.SetActive(true);
+        MenuManager.won = true;
     }
 
     private IEnumerator ResetCamera()
@@ -59,10 +59,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Camera.main.transform.position = player.transform.position;
         Destroy(this);
-    }
-
-    public void LoseScreen()
-    {
-
     }
 }

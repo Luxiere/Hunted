@@ -17,7 +17,7 @@ MonoBehaviour:
   dashCooldown: 2
   projectileSpeed: 17
   fireRate: 0.5
-  existTime: 2
+  existTime: 7
   flyingTime: 1
   damage: 30
   reloadTime: 2

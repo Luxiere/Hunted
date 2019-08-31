@@ -17,6 +17,7 @@ public class PlayerHealth: MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy Projectile")
         {
+            animator.SetTrigger("dead");
             gm.HandleLoseCondition();
         }
     }

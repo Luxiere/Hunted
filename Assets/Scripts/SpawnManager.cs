@@ -21,7 +21,10 @@ public class SpawnManager : MonoBehaviour
         {
             bounds = spawnArea[Random.Range(0, spawnArea.Length)].bounds;
             _randomPoint = new Vector2(Random.Range(bounds.min.x, bounds.max.x), Random.Range(bounds.min.y, bounds.max.y));
-            randomPos.Add(_randomPoint);
+            if (!randomPos.Contains(_randomPoint))
+            {
+                randomPos.Add(_randomPoint);
+            }
         }
         foreach (Vector2 _randomPoint in randomPos)
         {

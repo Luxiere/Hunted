@@ -6,18 +6,24 @@ using UnityEngine;
 public class PlayerHealth: MonoBehaviour
 {
     [SerializeField] Animator animator;
-    GameManager gm;
+    [SerializeField] AudioClip death;
+
+    PlayerMovement player;
 
     private void Start()
     {
-        gm = FindObjectOfType<GameManager>();
+        player = GetComponentInParent<PlayerMovement>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy Projectile")
+        Debug.Log("a");
+
+        if (collision.CompareTag("EnemyProjectile"))
         {
-            gm.HandleLoseCondition();
+            player.Dead();
+            animator.SetTrigger("dead");
+            AudioSource.PlayClipAtPoint(death, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
         }
     }
 }

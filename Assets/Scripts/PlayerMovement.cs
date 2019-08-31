@@ -6,36 +6,50 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Movement")]
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float timedStep = .5f;
+    [SerializeField] AudioClip[] clips;
 
     Rigidbody2D rb;
     Animator animator;
     PlayerDash playerDash;
+    GameManager gm;
 
+    float currentTimedStep;
     float currentMoveSpeed;
     float controlThrowHorizontal;
     float controlThrowVertical;
 
+    bool alive = true;
     bool dashable = true;
     bool isDashing = false;
 
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         rb = GetComponent<Rigidbody2D>();
         playerDash = GetComponent<PlayerDash>();
         animator = GetComponent<Animator>();
         currentMoveSpeed = moveSpeed;
+        currentTimedStep = 0;
     }
 
     void Update()
     {
-        ResetTrigger();
-        Direction();
-        Dash();
-        DashControl();
-        DashCooldown();
-        if (!isDashing)
+        if (alive)
         {
-            Movement();
+            ResetTrigger();
+            Direction();
+            Dash();
+            DashControl();
+            DashCooldown();
+            if (!isDashing)
+            {
+                Movement();
+            }
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 
@@ -44,6 +58,12 @@ public class PlayerMovement : MonoBehaviour
         controlThrowHorizontal = Input.GetAxis("Horizontal");
         controlThrowVertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(controlThrowHorizontal * currentMoveSpeed, controlThrowVertical * currentMoveSpeed);
+        if(currentTimedStep <= 0)
+        {
+            AudioSource.PlayClipAtPoint(clips[Random.Range(0, clips.Length)], Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
+            currentTimedStep = timedStep;
+        }
+        currentTimedStep -= Time.deltaTime;
     }
 
     private void Direction()                
@@ -117,6 +137,17 @@ public class PlayerMovement : MonoBehaviour
         {
             playerDash.Dash();
         }
+    }
+
+    public void Dead()
+    {
+        animator.SetTrigger("dead");
+        alive = false;
+    }
+
+    public void LoseScreen()
+    {
+        gm.HandleLoseCondition();
     }
 
     public bool GetIsDashing()

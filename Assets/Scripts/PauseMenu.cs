@@ -5,11 +5,10 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenuUI;
-    [SerializeField] GameObject optionMenuUI;
 
     public static bool Paused = false;
 
-    void Start()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -36,11 +35,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0;
         Paused = false;
-    }
-
-    public void Options()
-    {
-        optionMenuUI.SetActive(true);
     }
     
     public void MainMenu()

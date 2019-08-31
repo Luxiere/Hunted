@@ -21,6 +21,12 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] Sprite bow;
     [SerializeField] Sprite spear;
 
+    [Header("SFX")]
+    [SerializeField] AudioClip knifeSound;
+    [SerializeField] AudioClip bowSound;
+    [SerializeField] AudioClip arrowSound;
+    [SerializeField] AudioClip noAmmo;
+
     WeaponProperties currentWeapon;
 
     Animator animator;
@@ -40,9 +46,10 @@ public class PlayerShooting : MonoBehaviour
     float existTime;
     float flyTime;
 
+    bool UI_On = true;
     bool fireable = true;
     bool firing = false;
-
+        
     private void Awake()
     {
         switch (weapon)
@@ -61,6 +68,7 @@ public class PlayerShooting : MonoBehaviour
                 break;
         }
     }
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -76,17 +84,20 @@ public class PlayerShooting : MonoBehaviour
 
     private void Update()
     {
-        switch (weapon)
+        if (!UI_On)
         {
-            case Weapon.Knives:
-                RapidFire();
-                break;
-            case Weapon.Bow:
-                BurstFire();
-                break;
-            case Weapon.Spears:
-                HoldFire();
-                break;
+            switch (weapon)
+            {
+                case Weapon.Knives:
+                    RapidFire();
+                    break;
+                case Weapon.Bow:
+                    BurstFire();
+                    break;
+                case Weapon.Spears:
+                    HoldFire();
+                    break;
+            }
         }
     }
 
@@ -110,13 +121,14 @@ public class PlayerShooting : MonoBehaviour
                 if (fireRate <= 0)
                 {
                     FireRate(currentDamageMultiplier);
+                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
                     ResetFireRate();
                 }
             }
             else
             {
                 hand.enabled = false;
-                if (magLeft <= 0) { Debug.Log("No ammo"); }
+                if (magLeft <= 0) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume()); firing = false; }
                 else
                 {
                     hand.enabled = true;
@@ -132,9 +144,28 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             animator.SetBool("isHolding", true);
-            Debug.Log(currentDamageMultiplier);
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
+            if (Mathf.Approximately(shootingDirection.x, 0))
+            {
+                if (shootingDirection.y < 0) { animator.SetTrigger("aimingSouth"); ResetAiming(); }
+                else { animator.SetTrigger("aimingNorth"); ResetAiming(); }
+            }
+            else if(Mathf.Approximately(shootingDirection.y, 0))
+            {
+                if (shootingDirection.x < 0) { animator.SetTrigger("aimingEast"); ResetAiming(); }
+                else { animator.SetTrigger("aimingWest"); ResetAiming(); }
+            }
+            else if (shootingDirection.x < shootingDirection.y)
+            {
+                if (shootingDirection.y < 0) { animator.SetTrigger("aimingSouth"); ResetAiming(); }
+                else { animator.SetTrigger("aimingNorth"); ResetAiming(); }
+            }
+            else
+            {
+                if (shootingDirection.x < 0) { animator.SetTrigger("aimingEast"); ResetAiming(); }
+                else { animator.SetTrigger("aimingWest"); ResetAiming(); }
+            }
             if (currentMag > 0)
             {
                 currentDamageMultiplier += Time.deltaTime;
@@ -146,7 +177,7 @@ public class PlayerShooting : MonoBehaviour
             else
             {
                 fireable = false;
-                if (magLeft <= 0) { Debug.Log("No ammo"); }
+                if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume()); } }
                 else
                 {
                     reloadTime -= Time.deltaTime;
@@ -163,6 +194,7 @@ public class PlayerShooting : MonoBehaviour
             {
                 animator.SetBool("isHolding", false);
                 FireRate(currentDamageMultiplier);
+                AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
                 ResetFireRate();
             }
         }        
@@ -173,13 +205,14 @@ public class PlayerShooting : MonoBehaviour
         if (currentMag > 0)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
+            shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;            
             if (Input.GetMouseButton(0))
             {
                 fireRate -= Time.deltaTime;
                 if (fireRate <= 0)
                 {
                     FireRate(currentDamageMultiplier);
+                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
                     ResetFireRate();
                 }
             }
@@ -187,7 +220,7 @@ public class PlayerShooting : MonoBehaviour
         else
         {
             hand.enabled = false;
-            if (magLeft <= 0) { Debug.Log("No ammo"); }
+            if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume()); } }
             else
             {
                 reloadTime -= Time.deltaTime;
@@ -197,8 +230,7 @@ public class PlayerShooting : MonoBehaviour
                     hand.enabled = true;
                 }
             }
-        }
-        
+        }        
     }
 
     private void FireReload()
@@ -228,10 +260,19 @@ public class PlayerShooting : MonoBehaviour
         currentMag -= 1;
     }
 
+    private void ResetAiming()
+    {
+        animator.ResetTrigger("aimingNorth");
+        animator.ResetTrigger("aimingEast");
+        animator.ResetTrigger("aimingWest");
+        animator.ResetTrigger("aimingSouth");
+    }
+
     public WeaponProperties CurrentWeapon() { return currentWeapon; }
     public int RemainingBulletInMag() { return currentMag; }
     public int GetMaxMag() { return magLeft; }
     public void EmptyChamber() { currentMag = 0; }
     public void PickUpBullet(int bulletPickedUp) { magLeft += bulletPickedUp; }
+    public void UIOnOff(bool uiOn) { UI_On = uiOn; }
     public static void SetWeapon(Weapon Weapon) { weapon = Weapon; }
 }

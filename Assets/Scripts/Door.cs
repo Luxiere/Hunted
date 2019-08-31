@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    [SerializeField] private PolygonCollider2D[] spawnArea;
+    [SerializeField] private int _maxEnemyCount;
+
     SpawnManager sm;
+    GameManager gm;
 
     private void Start()
     {
         sm = FindObjectOfType<SpawnManager>();
+        gm = sm.GetComponent<GameManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        sm.Spawn();
-        Destroy(gameObject);
+        if (collision.CompareTag("Player"))
+        {
+            MusicMaster.FadeIn(gm.fight, gm.chill, .25f);
+            sm.Spawn(spawnArea, _maxEnemyCount);
+            gm.AddEnemy(_maxEnemyCount);
+            Destroy(gameObject);
+        }
     }
 }

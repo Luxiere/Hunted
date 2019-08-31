@@ -9,6 +9,8 @@ public class PlayerProjectile : MonoBehaviour
     BoxCollider2D box;
 
     [SerializeField] bool piercing = false;
+    [SerializeField] GameObject grass;
+    [SerializeField] AudioClip hit;
 
     float flyTime;
     float currentFlyTime = 0;
@@ -31,6 +33,9 @@ public class PlayerProjectile : MonoBehaviour
         else
         {
             box.enabled = false;
+            rb.velocity = Vector2.zero;
+            transform.up = Vector2.up;
+            grass.SetActive(true);
         }        
     }
 
@@ -43,6 +48,7 @@ public class PlayerProjectile : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            AudioSource.PlayClipAtPoint(hit, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
         }
         else
         {

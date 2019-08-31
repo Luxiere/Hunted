@@ -11,17 +11,18 @@ public class SpawnManager : MonoBehaviour
     private Bounds bounds;
 
     [Header("Spawner Properties")]
-    [SerializeField] private int _maxEnemyCount;
     [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private PolygonCollider2D[] spawnArea;
 
-    public void Spawn()
+    public void Spawn(PolygonCollider2D[] spawnArea, int _maxEnemyCount)
     {
         while (randomPos.Count < _maxEnemyCount)
         {
             bounds = spawnArea[Random.Range(0, spawnArea.Length)].bounds;
             _randomPoint = new Vector2(Random.Range(bounds.min.x, bounds.max.x), Random.Range(bounds.min.y, bounds.max.y));
-            randomPos.Add(_randomPoint);
+            if (!randomPos.Contains(_randomPoint))
+            {
+                randomPos.Add(_randomPoint);
+            }
         }
         foreach (Vector2 _randomPoint in randomPos)
         {
@@ -29,6 +30,4 @@ public class SpawnManager : MonoBehaviour
             enemy.transform.position = _randomPoint;
         }
     }
-
-    public int GetEnemyNumbers() { return _maxEnemyCount; }
 }

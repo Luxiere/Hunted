@@ -101,6 +101,7 @@ MonoBehaviour:
   piercing: 0
   grass: {fileID: 8036258788318066067}
   hit: {fileID: 8300000, guid: ca4dc7e5a4c8447408b8fbd834afc482, type: 3}
+  speed: 200
 --- !u!50 &6194331307712397360
 Rigidbody2D:
   serializedVersion: 4

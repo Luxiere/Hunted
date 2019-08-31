@@ -35,7 +35,9 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField] private float _maxShootDelay;
 	[SerializeField] private float _bulletSpeed;
 	[SerializeField] private float _destroyBulletTime;
+	[SerializeField] private float _lieBulletPercentage;
 	[SerializeField] private GameObject _bulletPrefab;
+	[SerializeField] private GameObject _lieBulletPrefab;
 
 	private void Start()
 	{
@@ -87,14 +89,18 @@ public class EnemyAI : MonoBehaviour
 				Vector2 playerDir = new Vector2(_playerPos.transform.position.x - transform.position.x, _playerPos.transform.position.y - transform.position.y);
 				playerDir.Normalize();
 				var bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation) as GameObject;
+				Debug.Log(Random.value);
 				bullet.transform.rotation = Quaternion.Euler(playerDir);
 				bullet.transform.parent = projectileParent.transform;
 				bullet.GetComponent<Rigidbody2D>().velocity = playerDir * _bulletSpeed * Time.fixedDeltaTime;
 				Destroy(bullet, _destroyBulletTime);
+
+				if (Random.value <= _lieBulletPercentage)
+				{
+					Instantiate(_lieBulletPrefab, transform.position, transform.rotation);
+				}
 				_shootTimer = Random.Range(_minShootDelay, _maxShootDelay);
 			}
-
-			_timeUntilStartShooting = Random.Range(_minShootDelay, _maxShootDelay);
 		}
 	}
 

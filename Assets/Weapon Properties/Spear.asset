@@ -17,9 +17,9 @@ MonoBehaviour:
   dashCooldown: 2
   projectileSpeed: 15
   fireRate: 2
-  existTime: 7
+  existTime: 20
   flyingTime: 2
-  damage: 100
+  damage: 50
   reloadTime: 3
   maxBullet: 15
   magazine: 1

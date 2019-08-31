@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MagUI : MonoBehaviour
 {
-    [SerializeField] Text currentMag;
-    [SerializeField] Text maxMag;
+    [SerializeField] TextMeshProUGUI currentMag;
+    [SerializeField] TextMeshProUGUI maxMag;
     [SerializeField] Image image;
     [SerializeField] Sprite arrow;
     [SerializeField] Sprite spear;

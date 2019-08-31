@@ -21,6 +21,12 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] Sprite bow;
     [SerializeField] Sprite spear;
 
+    [Header("SFX")]
+    [SerializeField] AudioClip knifeSound;
+    [SerializeField] AudioClip bowSound;
+    [SerializeField] AudioClip arrowSound;
+    [SerializeField] AudioClip noAmmo;
+
     WeaponProperties currentWeapon;
 
     Animator animator;
@@ -111,13 +117,14 @@ public class PlayerShooting : MonoBehaviour
                 if (fireRate <= 0)
                 {
                     FireRate(currentDamageMultiplier);
+                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position);
                     ResetFireRate();
                 }
             }
             else
             {
                 hand.enabled = false;
-                if (magLeft <= 0) { Debug.Log("No ammo"); }
+                if (magLeft <= 0) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position); firing = false; }
                 else
                 {
                     hand.enabled = true;
@@ -135,7 +142,6 @@ public class PlayerShooting : MonoBehaviour
             animator.SetBool("isHolding", true);
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
-            Debug.Log(shootingDirection);
             if (Mathf.Approximately(shootingDirection.x, 0))
             {
                 if (shootingDirection.y < 0) { animator.SetTrigger("aimingSouth"); ResetAiming(); }
@@ -167,7 +173,7 @@ public class PlayerShooting : MonoBehaviour
             else
             {
                 fireable = false;
-                if (magLeft <= 0) { Debug.Log("No ammo"); }
+                if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position); } }
                 else
                 {
                     reloadTime -= Time.deltaTime;
@@ -184,6 +190,7 @@ public class PlayerShooting : MonoBehaviour
             {
                 animator.SetBool("isHolding", false);
                 FireRate(currentDamageMultiplier);
+                AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position);
                 ResetFireRate();
             }
         }        
@@ -201,6 +208,7 @@ public class PlayerShooting : MonoBehaviour
                 if (fireRate <= 0)
                 {
                     FireRate(currentDamageMultiplier);
+                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position);
                     ResetFireRate();
                 }
             }
@@ -208,7 +216,7 @@ public class PlayerShooting : MonoBehaviour
         else
         {
             hand.enabled = false;
-            if (magLeft <= 0) { Debug.Log("No ammo"); }
+            if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position); } }
             else
             {
                 reloadTime -= Time.deltaTime;
@@ -218,8 +226,7 @@ public class PlayerShooting : MonoBehaviour
                     hand.enabled = true;
                 }
             }
-        }
-        
+        }        
     }
 
     private void FireReload()

@@ -11,11 +11,9 @@ public class SpawnManager : MonoBehaviour
     private Bounds bounds;
 
     [Header("Spawner Properties")]
-    [SerializeField] private int _maxEnemyCount;
     [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private PolygonCollider2D[] spawnArea;
 
-    public void Spawn()
+    public void Spawn(PolygonCollider2D[] spawnArea, int _maxEnemyCount)
     {
         while (randomPos.Count < _maxEnemyCount)
         {
@@ -32,6 +30,4 @@ public class SpawnManager : MonoBehaviour
             enemy.transform.position = _randomPoint;
         }
     }
-
-    public int GetEnemyNumbers() { return _maxEnemyCount; }
 }

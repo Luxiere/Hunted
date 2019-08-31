@@ -10,8 +10,22 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject _mainMenu;
 	[SerializeField] private GameObject _optionsMenu;
 	[SerializeField] private GameObject _creditsMenu;
+    [SerializeField] Texture2D cursor;
+    [SerializeField] Animator animator;
 
-	public void StartGame()
+    bool won;
+
+    private void Start()
+    {
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        won = GetComponent<DataSave>().Load();
+        if (won)
+        {
+            animator.enabled = true;
+        }
+    }
+
+    public void StartGame()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}

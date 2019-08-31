@@ -10,6 +10,7 @@ public class PlayerProjectile : MonoBehaviour
 
     [SerializeField] bool piercing = false;
     [SerializeField] GameObject grass;
+    [SerializeField] AudioClip hit;
 
     float flyTime;
     float currentFlyTime = 0;
@@ -47,6 +48,7 @@ public class PlayerProjectile : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            AudioSource.PlayClipAtPoint(hit, Camera.main.transform.position);
         }
         else
         {

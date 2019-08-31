@@ -34,4 +34,13 @@ public class OptionController : MonoBehaviour
         PlayerPrefsController.SetMusicVolume(savedMusicVolume);
         PlayerPrefsController.SetSoundVolume(savedSoundVolume);
     }
+
+    private void Update()
+    {
+        MusicPlayer musicPlayer = GetComponent<MusicPlayer>();
+        if (musicPlayer)
+        {
+            musicPlayer.SetVolume(musicSlider.value);
+        }
+    }
 }

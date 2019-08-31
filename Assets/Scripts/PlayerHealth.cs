@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerHealth: MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] AudioClip death;
     GameManager gm;
 
     private void Start()
@@ -19,6 +20,7 @@ public class PlayerHealth: MonoBehaviour
         {
             animator.SetTrigger("dead");
             gm.HandleLoseCondition();
+            AudioSource.PlayClipAtPoint(death, Camera.main.transform.position);
         }
     }
 }

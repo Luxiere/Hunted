@@ -22,6 +22,7 @@ public class EnemyAI : MonoBehaviour
 
 	[Header("General Enemy Values")]
 	[SerializeField] private int _health;
+    [SerializeField] private AudioClip[] audioDeath;
 
 	[Header("Enemy Movement Releated Values")]
 	[SerializeField] private float _moveSpeed;
@@ -36,8 +37,10 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField] private float _bulletSpeed;
 	[SerializeField] private float _destroyBulletTime;
 	[SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private AudioClip shootingSFX;
 
-	private void Start()
+
+    private void Start()
 	{
 		_currentSpeed = _moveSpeed;
 
@@ -72,6 +75,7 @@ public class EnemyAI : MonoBehaviour
 		if (_health <= 0)
 		{
 			_rb.velocity = Vector2.zero;
+            AudioSource.PlayClipAtPoint(audioDeath[Random.Range(0, audioDeath.Length)], Camera.main.transform.position);
 			_anim.SetTrigger("dead");
 			GetComponent<Collider2D>().enabled = false;
 			_isDead = true;
@@ -87,6 +91,7 @@ public class EnemyAI : MonoBehaviour
 				Vector2 playerDir = new Vector2(_playerPos.transform.position.x - transform.position.x, _playerPos.transform.position.y - transform.position.y);
 				playerDir.Normalize();
 				var bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation) as GameObject;
+                AudioSource.PlayClipAtPoint(shootingSFX, Camera.main.transform.position);
 				bullet.transform.rotation = Quaternion.Euler(playerDir);
 				bullet.transform.parent = projectileParent.transform;
 				bullet.GetComponent<Rigidbody2D>().velocity = playerDir * _bulletSpeed * Time.fixedDeltaTime;

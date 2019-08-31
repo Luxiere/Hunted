@@ -5,25 +5,35 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject[] door;
+    public AudioSource chill;
+    public AudioSource fight;
 
     LevelSystem ls;
     SceneManagement sm;
     PlayerMovement player;
+
     int enemies;
 
     void Start()
     {
         player = FindObjectOfType<PlayerMovement>();
         sm = GetComponent<SceneManagement>();
+        chill.volume = PlayerPrefsController.GetMusicVolume();
+        fight.volume = 0;
     }
-    
+
     public void EnemyDeath()
     {
         enemies -= 1;
         if (enemies <= 0)
         {
-            HandleWinCondition();
+            MusicMaster.FadeIn(chill, fight, .5f);
         }
+    }
+
+    public void AddEnemy(int enemies)
+    {
+        this.enemies += enemies;
     }
 
     public void HandleLoseCondition()
@@ -33,17 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void HandleWinCondition()
     {
-        Debug.Log("yay");
-        if (!sm.CheckLastScene())
-        {
-            GetComponent<SceneManagement>().LoadNextScene();
-            foreach (GameObject i in door)
-            {
-                i.SetActive(false);
-            }
-            Camera.main.transform.position = door[0].transform.position;
-            StartCoroutine(ResetCamera());
-        }
+        GetComponent<DataSave>().Save();
     }
 
     private IEnumerator ResetCamera()
@@ -52,6 +52,4 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.position = player.transform.position;
         Destroy(this);
     }
-
-
 }

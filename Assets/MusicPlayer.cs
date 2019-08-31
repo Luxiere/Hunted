@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
-    [SerializeField] AudioClip[] audioClips;
     AudioSource audioSource;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();

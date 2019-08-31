@@ -37,7 +37,7 @@ public class OptionController : MonoBehaviour
 
     private void Update()
     {
-        MusicPlayer musicPlayer = GetComponent<MusicPlayer>();
+        MusicPlayer musicPlayer = FindObjectOfType<MusicPlayer>();
         if (musicPlayer)
         {
             musicPlayer.SetVolume(musicSlider.value);

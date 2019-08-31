@@ -141,63 +141,45 @@ public class PlayerShooting : MonoBehaviour
 
     private void HoldFire()
     {
-        if (Input.GetMouseButton(0))
+        if (currentMag > 0)
         {
-            animator.SetBool("isHolding", true);
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
-            if (Mathf.Approximately(shootingDirection.x, 0))
+            if (Input.GetMouseButton(0))
             {
-                if (shootingDirection.y < 0) { animator.SetTrigger("aimingSouth"); ResetAiming(); }
-                else { animator.SetTrigger("aimingNorth"); ResetAiming(); }
-            }
-            else if(Mathf.Approximately(shootingDirection.y, 0))
-            {
-                if (shootingDirection.x < 0) { animator.SetTrigger("aimingEast"); ResetAiming(); }
-                else { animator.SetTrigger("aimingWest"); ResetAiming(); }
-            }
-            else if (shootingDirection.x < shootingDirection.y)
-            {
-                if (shootingDirection.y < 0) { animator.SetTrigger("aimingSouth"); ResetAiming(); }
-                else { animator.SetTrigger("aimingNorth"); ResetAiming(); }
-            }
-            else
-            {
-                if (shootingDirection.x < 0) { animator.SetTrigger("aimingEast"); ResetAiming(); }
-                else { animator.SetTrigger("aimingWest"); ResetAiming(); }
-            }
-            if (currentMag > 0)
-            {
+                animator.SetBool("isHolding", true);
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
+
                 currentDamageMultiplier += Time.deltaTime;
                 if (currentDamageMultiplier >= fireRate)
                 {
                     currentDamageMultiplier = fireRate;
                 }
-            }
-            else
+            }         
+            else if (Input.GetMouseButtonUp(0))
             {
-                fireable = false;
-                if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume()); } }
-                else
+                if (fireable)
                 {
-                    reloadTime -= Time.deltaTime;
-                    if (reloadTime <= 0)
-                    {
-                        FireReload();
-                    }
+                    animator.SetBool("isHolding", false);
+                    FireRate(currentDamageMultiplier);
+                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
+                    ResetFireRate();
                 }
             }
         }
-        else if (Input.GetMouseButtonUp(0))
+        else
         {
-            if (fireable)
+            animator.SetBool("isHolding", false);
+            fireable = false;
+            if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume()); } }
+            else
             {
-                animator.SetBool("isHolding", false);
-                FireRate(currentDamageMultiplier);
-                AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
-                ResetFireRate();
+                reloadTime -= Time.deltaTime;
+                if (reloadTime <= 0)
+                {
+                    FireReload();
+                }
             }
-        }        
+        }
     }
 
     private void RapidFire()
@@ -258,14 +240,6 @@ public class PlayerShooting : MonoBehaviour
         fireRate = currentWeapon.GetFireRate();
         this.currentDamageMultiplier = 1;
         currentMag -= 1;
-    }
-
-    private void ResetAiming()
-    {
-        animator.ResetTrigger("aimingNorth");
-        animator.ResetTrigger("aimingEast");
-        animator.ResetTrigger("aimingWest");
-        animator.ResetTrigger("aimingSouth");
     }
 
     public WeaponProperties CurrentWeapon() { return currentWeapon; }

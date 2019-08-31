@@ -7,20 +7,23 @@ public class PlayerHealth: MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] AudioClip death;
-    GameManager gm;
+
+    PlayerMovement player;
 
     private void Start()
     {
-        gm = FindObjectOfType<GameManager>();
+        player = GetComponentInParent<PlayerMovement>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy Projectile")
+        Debug.Log("a");
+
+        if (collision.CompareTag("EnemyProjectile"))
         {
+            player.Dead();
             animator.SetTrigger("dead");
-            gm.HandleLoseCondition();
-            AudioSource.PlayClipAtPoint(death, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(death, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
         }
     }
 }

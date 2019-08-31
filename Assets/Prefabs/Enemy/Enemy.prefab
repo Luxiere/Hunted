@@ -190,7 +190,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  audioDeath: []
+  audioDeath:
+  - {fileID: 8300000, guid: fe81b759f2e2a8443ba2746587056400, type: 3}
+  - {fileID: 8300000, guid: c8ef77549194c2445bc9a60b7521cd17, type: 3}
+  - {fileID: 8300000, guid: 50108fcc2ee6fa6418725f43bb394620, type: 3}
+  - {fileID: 8300000, guid: 09bfb93cc1ae09844b9a51b9231975b0, type: 3}
+  - {fileID: 8300000, guid: 27fafe187935ad5419bde0ba4921f63b, type: 3}
+  - {fileID: 8300000, guid: 7afdae201a63fcf42be95bcd0c10aaa0, type: 3}
+  - {fileID: 8300000, guid: 2d14dad55fd20ad4794825275ed4bb6f, type: 3}
   _moveSpeed: 200
   _maxVelocity: 10
   _startMovingTime: 2

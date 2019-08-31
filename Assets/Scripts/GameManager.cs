@@ -5,6 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject[] door;
+    [SerializeField] GameObject UI;
+
+    [SerializeField] GameObject winScreen;
+    [SerializeField] GameObject loseScreen;
+
     public AudioSource chill;
     public AudioSource fight;
 
@@ -40,11 +45,12 @@ public class GameManager : MonoBehaviour
 
     public void HandleLoseCondition()
     {
-
+        loseScreen.SetActive(true);
     }
 
     public void HandleWinCondition()
     {
+        winScreen.SetActive(false);
         GetComponent<DataSave>().Save();
     }
 
@@ -53,5 +59,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Camera.main.transform.position = player.transform.position;
         Destroy(this);
+    }
+
+    public void LoseScreen()
+    {
+
     }
 }

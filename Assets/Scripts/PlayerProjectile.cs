@@ -48,7 +48,7 @@ public class PlayerProjectile : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            AudioSource.PlayClipAtPoint(hit, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(hit, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
         }
         else
         {

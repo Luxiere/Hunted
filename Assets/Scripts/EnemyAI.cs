@@ -75,12 +75,12 @@ public class EnemyAI : MonoBehaviour
 		if (_health <= 0)
 		{
 			_rb.velocity = Vector2.zero;
-            AudioSource.PlayClipAtPoint(audioDeath[Random.Range(0, audioDeath.Length)], Camera.main.transform.position);
 			_anim.SetTrigger("dead");
-			GetComponent<Collider2D>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
 			_isDead = true;
-		}
-	}
+            AudioSource.PlayClipAtPoint(audioDeath[Random.Range(0, audioDeath.Length)], Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
+        }
+    }
 
 	private void Shoot()
 	{
@@ -91,7 +91,7 @@ public class EnemyAI : MonoBehaviour
 				Vector2 playerDir = new Vector2(_playerPos.transform.position.x - transform.position.x, _playerPos.transform.position.y - transform.position.y);
 				playerDir.Normalize();
 				var bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation) as GameObject;
-                AudioSource.PlayClipAtPoint(shootingSFX, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(shootingSFX, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
 				bullet.transform.rotation = Quaternion.Euler(playerDir);
 				bullet.transform.parent = projectileParent.transform;
 				bullet.GetComponent<Rigidbody2D>().velocity = playerDir * _bulletSpeed * Time.fixedDeltaTime;

@@ -18,9 +18,12 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        MusicMaster.FadeIn(gm.fight, gm.chill, .25f);
-        sm.Spawn(spawnArea, _maxEnemyCount);
-        gm.AddEnemy(_maxEnemyCount);
-        Destroy(gameObject);
+        if (collision.CompareTag("Player"))
+        {
+            MusicMaster.FadeIn(gm.fight, gm.chill, .25f);
+            sm.Spawn(spawnArea, _maxEnemyCount);
+            gm.AddEnemy(_maxEnemyCount);
+            Destroy(gameObject);
+        }
     }
 }

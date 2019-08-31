@@ -6,19 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
-    }
-
     public void LoadScene(int idx)
     {
         SceneManager.LoadScene(idx);
     }
 
-    public bool CheckLastScene()
+    public void ReloadScene()
     {
-        return SceneManager.sceneCountInBuildSettings == SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Quit()

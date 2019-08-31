@@ -121,14 +121,14 @@ public class PlayerShooting : MonoBehaviour
                 if (fireRate <= 0)
                 {
                     FireRate(currentDamageMultiplier);
-                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position);
+                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
                     ResetFireRate();
                 }
             }
             else
             {
                 hand.enabled = false;
-                if (magLeft <= 0) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position); firing = false; }
+                if (magLeft <= 0) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume()); firing = false; }
                 else
                 {
                     hand.enabled = true;
@@ -177,7 +177,7 @@ public class PlayerShooting : MonoBehaviour
             else
             {
                 fireable = false;
-                if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position); } }
+                if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume()); } }
                 else
                 {
                     reloadTime -= Time.deltaTime;
@@ -194,7 +194,7 @@ public class PlayerShooting : MonoBehaviour
             {
                 animator.SetBool("isHolding", false);
                 FireRate(currentDamageMultiplier);
-                AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
                 ResetFireRate();
             }
         }        
@@ -212,7 +212,7 @@ public class PlayerShooting : MonoBehaviour
                 if (fireRate <= 0)
                 {
                     FireRate(currentDamageMultiplier);
-                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position);
+                    AudioSource.PlayClipAtPoint(bowSound, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume());
                     ResetFireRate();
                 }
             }
@@ -220,7 +220,7 @@ public class PlayerShooting : MonoBehaviour
         else
         {
             hand.enabled = false;
-            if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position); } }
+            if (magLeft <= 0) { if (Input.GetMouseButtonDown(0)) { AudioSource.PlayClipAtPoint(noAmmo, Camera.main.transform.position, PlayerPrefsController.GetSoundVolume()); } }
             else
             {
                 reloadTime -= Time.deltaTime;

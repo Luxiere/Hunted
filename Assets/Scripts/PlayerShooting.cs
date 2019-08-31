@@ -107,8 +107,8 @@ public class PlayerShooting : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                shootingDirection = (mousePos - (Vector2) transform.position) / (mousePos - (Vector2) transform.position).magnitude;
                 firing = true;
                 fireable = false;
             }
@@ -146,8 +146,8 @@ public class PlayerShooting : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 animator.SetBool("isHolding", true);
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                shootingDirection = (mousePos - (Vector2)transform.position) / (mousePos - (Vector2)transform.position).magnitude;
 
                 currentDamageMultiplier += Time.deltaTime;
                 if (currentDamageMultiplier >= fireRate)
@@ -186,8 +186,8 @@ public class PlayerShooting : MonoBehaviour
     {
         if (currentMag > 0)
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            shootingDirection = (mousePos - transform.position) / (mousePos - transform.position).magnitude;            
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            shootingDirection = (mousePos - (Vector2)transform.position) / (mousePos - (Vector2)transform.position).magnitude;
             if (Input.GetMouseButton(0))
             {
                 fireRate -= Time.deltaTime;

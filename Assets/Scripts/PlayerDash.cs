@@ -9,6 +9,7 @@ public class PlayerDash : MonoBehaviour
 
     [Header("Quirk properties")]
     [SerializeField] float knifeConeAngle;
+    [SerializeField] GameObject playerCollider;
     [SerializeField] GameObject spearShadowPrefab;
 
     Rigidbody2D rb;
@@ -109,10 +110,10 @@ public class PlayerDash : MonoBehaviour
 
     public void BowQuirk()
     {
-        gameObject.layer = 31;
+        playerCollider.layer = LayerMask.GetMask("Invulnerable");
         if(dashed)
         {
-            gameObject.layer = 8;
+            playerCollider.layer = LayerMask.GetMask("Player");
         }
     }
 
